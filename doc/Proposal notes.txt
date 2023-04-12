@@ -1,0 +1,6 @@
+Proposal class notes:
+
+1. picture functionality
+	geo tagging
+	hash tag
+	trend
