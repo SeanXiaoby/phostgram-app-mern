@@ -5,7 +5,6 @@ import { SiNetlify, SiMongodb } from "react-icons/si";
 import { DiNodejsSmall } from "react-icons/di";
 
 const Footer = () => {
-  console.log("Footer");
   return (
     <div className="footer">
       <h5>Powered by</h5>
