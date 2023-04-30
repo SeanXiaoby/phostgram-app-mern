@@ -296,7 +296,7 @@ ul {
     position: fixed;
     background: var(--backgroud-color);
     border-bottom: 1px solid var(--grey-800);
-    padding: 1rem 2rem;
+    padding: 0.5rem 2rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -310,7 +310,7 @@ ul {
 }
 
 .navbar-img {
-    height: 3rem;
+    height: 4rem;
     margin: 0 auto;
 }
 
