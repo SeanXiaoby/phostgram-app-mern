@@ -1,7 +1,7 @@
 import React from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import Phostlist from "../components/Phostlist";
+import Phostlist from "../components/PhostList";
 
 const Home = () => {
   return (
