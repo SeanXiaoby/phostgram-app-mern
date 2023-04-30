@@ -313,6 +313,11 @@ ul {
     .navbar-img-container {
         text-align: left;
     }
+
+    .navbar {
+        padding: 1rem 0.5rem;
+    }
+
 }
 
 @keyframes avatar-spinner {
@@ -328,7 +333,7 @@ ul {
     border: 2px solid var(--primary-600);
     padding: 2px 2px;
     position: fixed;
-    right: 2rem;
+    right: 1rem;
     transition: var(--transition);
 }
 
@@ -350,7 +355,7 @@ ul {
     align-items: center;
     height: 100%;
     position: fixed;
-    right: 2rem;
+    right: 1rem;
     transition: var(--transition);
     /* border: 1px solid var(--grey-800); */
 }
@@ -400,7 +405,6 @@ ul {
 
 .footer-icon-container {
     margin: 0 auto;
-    width: var(--fixed-width);
 }
 
 @media screen and (max-width: 768px) {
@@ -438,7 +442,6 @@ ul {
     margin: 0 auto;
     margin-top: 2rem;
     margin-bottom: -3rem;
-    /* width: var(--fixed-width); */
 }
 
 .footer-rights-container h4 {
