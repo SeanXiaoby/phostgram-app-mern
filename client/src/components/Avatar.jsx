@@ -6,9 +6,9 @@ const Avatar = (props) => {
   user_avatar = user_avatar === undefined ? null : user_avatar;
 
   return (
-    <div class="avatar-container">
+    <div className="avatar-container">
       <img
-        class="avatar-img"
+        className="avatar-img"
         src={user_avatar === null ? default_avatar : user_avatar}
         alt="avatar"
       />
