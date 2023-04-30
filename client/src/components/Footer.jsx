@@ -16,7 +16,7 @@ const Footer = () => {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <BsGithub className="footer-icon" size={40} />
+          <BsGithub className="footer-icon" size={30} />
         </a>
         <a
           className="footer-icon-link"
@@ -24,7 +24,7 @@ const Footer = () => {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <FaReact className="footer-icon" size={40} />
+          <FaReact className="footer-icon" size={30} />
         </a>
         <a
           className="footer-icon-link"
@@ -32,7 +32,7 @@ const Footer = () => {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <DiNodejsSmall className="footer-icon" size={40} />
+          <DiNodejsSmall className="footer-icon" size={30} />
         </a>
         <a
           className="footer-icon-link"
@@ -40,7 +40,7 @@ const Footer = () => {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <SiMongodb className="footer-icon" size={40} />
+          <SiMongodb className="footer-icon" size={30} />
         </a>
         <a
           className="footer-icon-link"
@@ -48,11 +48,11 @@ const Footer = () => {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <SiNetlify className="footer-icon" size={40} />
+          <SiNetlify className="footer-icon" size={30} />
         </a>
       </div>
       <div className="footer-rights-container">
-        <h4 class="footer-rights">
+        <h4 className="footer-rights">
           Copyrights © Boyang Xiao, Yuangfeng Li, Zhen Qian 2023 All rights
           reserved
         </h4>
