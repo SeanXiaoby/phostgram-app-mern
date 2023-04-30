@@ -31,6 +31,7 @@ user: {
 author:{
     id: String!,
     username: String!,
+    avatar: String!,
 }
 ```
 
