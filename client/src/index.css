@@ -1,9 +1,6 @@
 /****** Global style *******/
 
-/* temp */
-body {
-    padding: 2rem 5rem;
-}
+@import url('https://fonts.googleapis.com/css?family=Roboto:400');
 
 *,
 ::after,
@@ -14,7 +11,7 @@ body {
 }
 
 
-@import url('https://fonts.googleapis.com/css?family=Roboto:400');
+
 
 html {
     font-size: 100%;
@@ -264,7 +261,6 @@ ul {
     border-radius: 50%;
     border: 3px solid var(--grey-400);
     border-top-color: var(--primary-700);
-    animation: spinner 1s linear infinite;
 }
 
 /* title */
@@ -282,4 +278,103 @@ ul {
     background: var(--primary-500);
     height: 0.25rem;
     margin: 0 auto;
+}
+
+
+
+/****** Project style *******/
+
+/* navbar */
+
+.navbar {
+    position: relative;
+    background: var(--backgroud-color);
+    border-bottom: 1px solid var(--grey-800);
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.navbar-img-container {
+    width: 100%;
+    text-align: center;
+}
+
+.navbar-img {
+    height: 50px;
+    margin: 0 auto;
+}
+
+@media screen and (max-width: 768px) {
+    .navbar-img-container {
+        text-align: left;
+    }
+}
+
+@keyframes avatar-spinner {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.avatar-container {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    border: 2px solid var(--primary-600);
+    padding: 2px 2px;
+    position: fixed;
+    right: 2rem;
+    transition: var(--transition);
+}
+
+.avatar-img {
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid var(--grey-800);
+}
+
+.avatar-container:hover {
+    cursor: pointer;
+    border: 2px solid var(--primary-200);
+}
+
+.signer-container {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    position: fixed;
+    right: 2rem;
+    transition: var(--transition);
+    /* border: 1px solid var(--grey-800); */
+}
+
+#btn-sign-in {
+    border: 1px solid var(--primary-500);
+}
+
+#btn-sign-in:hover {
+    box-shadow: none;
+    background: transparent;
+    border: 1px solid var(--primary-500);
+    color: var(--primary-500);
+}
+
+.sign-up-container {
+    height: 50px;
+    display: table;
+    margin-right: 1rem;
+}
+
+#btn-sign-up {
+    display: table-cell;
+    vertical-align: middle;
+    cursor: pointer;
+    text-transform: capitalize;
+    font-weight: 600;
+    color: var(--grey-800)
 }
