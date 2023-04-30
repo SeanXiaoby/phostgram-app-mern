@@ -7,9 +7,9 @@ const Navbar = () => {
   const { user, setUser } = useState(localStorage.getItem("user"));
 
   return (
-    <div class="navbar">
-      <div class="navbar-img-container">
-        <img src={logo} alt="logo" class="navbar-img" />
+    <div className="navbar">
+      <div className="navbar-img-container">
+        <img src={logo} alt="logo" className="navbar-img" />
       </div>
       {user === undefined ? <Signer /> : <Avatar />}
     </div>
