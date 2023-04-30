@@ -568,3 +568,30 @@ ul {
     font-size: var(--small-text);
     margin-top: -1px
 }
+
+/* Landing page */
+
+.landing-form {
+    margin: 10rem auto;
+    /* background: var(--primary-100); */
+    transition: var(--transition);
+}
+
+.landing-form:hover {
+    box-shadow: var(--shadow-3);
+}
+
+.landing-form-content {
+    margin: 2rem auto;
+}
+
+.landing-form button {
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.landing-form p {
+    margin: 0 auto;
+    text-align: center;
+    cursor: pointer;
+}
