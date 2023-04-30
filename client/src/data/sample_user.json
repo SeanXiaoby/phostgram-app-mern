@@ -1,0 +1,16 @@
+[
+  {
+    "id": "2000001",
+    "username": "SeanSheep",
+    "email": "sample@usc.edu",
+    "avatar": "http://www.example.com/avatar.jpg",
+    "phost": []
+  },
+  {
+    "id": "2000002",
+    "username": "SeanDog",
+    "email": "sample2@usc.edu",
+    "avatar": "http://www.example.com/avatar2.jpg",
+    "phost": []
+  }
+]
