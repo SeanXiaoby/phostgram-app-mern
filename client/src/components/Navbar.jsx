@@ -10,13 +10,13 @@ const Navbar = () => {
 
   const navigate = useNavigate();
   const handleToSignIn = () => {
-    window.location.href = "/landing/signin";
+    navigate("/landing/signin");
   };
   const handleToSignup = () => {
-    window.location.href = "/landing/signup";
+    navigate("/landing/signup");
   };
   const handleHome = () => {
-    window.location.href = "/";
+    navigate("/");
   };
 
   return (
