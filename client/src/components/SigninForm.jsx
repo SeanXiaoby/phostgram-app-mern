@@ -1,6 +1,9 @@
 import React from "react";
+import { useNavigate } from "react-router";
 
 const SigninForm = ({ changeType }) => {
+  const navigate = useNavigate();
+
   return (
     <div className="form landing-form">
       <div className="title">
@@ -33,7 +36,13 @@ const SigninForm = ({ changeType }) => {
       <button type="button" className="btn btn-block">
         Sign in
       </button>
-      <p onClick={() => (window.location.href = "/landing/signup")}>Sign up</p>
+      <p
+        onClick={() => {
+          changeType("signup");
+        }}
+      >
+        Sign up
+      </p>
     </div>
   );
 };

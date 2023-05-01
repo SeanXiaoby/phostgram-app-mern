@@ -2,16 +2,19 @@ import React from "react";
 import default_avatar from "../img/default_avatar.jpg";
 import { getTimeDiff } from "../utils/util_date";
 import { GoComment } from "react-icons/go";
+import { useNavigate } from "react-router";
 
 const PhostListItem = ({ phost }) => {
   const { author, img, text, created_at, comments } = phost;
 
+  const navigate = useNavigate();
+
   const handleClickImage = () => {
-    window.location.href = `/phost/${phost.id}`;
+    navigate(`/phost/${phost.id}`);
   };
 
   const handleClickComments = () => {
-    window.location.href = `/phost/${phost.id}#phostpage-comments`;
+    navigate(`/phost/${phost.id}#phostpage-comments`);
   };
 
   return (

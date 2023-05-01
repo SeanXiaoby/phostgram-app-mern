@@ -65,7 +65,7 @@ const sample_phosts = [
         created_at: "2016-01-01 00:00:00",
       },
       {
-        id: "3000003",
+        id: "3000002",
         author: {
           id: "2000001",
           username: "SeanSheep",
