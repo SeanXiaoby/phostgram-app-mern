@@ -3,17 +3,21 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import SigninForm from "../components/SigninForm";
 import SignupForm from "../components/SignupForm";
+import { useLocation, useParams } from "react-router-dom";
 
 const Landing = () => {
-  const [landingType, setLandingType] = useState("signin");
+  const location = useLocation();
+  const { type } = useParams();
+
+  const [landingType, setLandingType] = useState(
+    type === "signin" ? "signin" : "signup"
+  );
 
   const changeLandingType = (type) => {
     if (type === "signin" || type === "signup") {
       setLandingType(type);
     }
   };
-
-  console.log(landingType);
 
   return (
     <>

@@ -6,9 +6,9 @@ import { GoComment } from "react-icons/go";
 const PhostListItem = ({ phost }) => {
   const { author, img, text, created_at, comments } = phost;
 
-  console.log(new Date(created_at).getFullYear());
+  // console.log(new Date(created_at).getFullYear());
 
-  console.log(phost);
+  // console.log(phost);
   return (
     <div className="phost-list-item">
       <div className="phost-list-item-author">

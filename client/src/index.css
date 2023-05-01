@@ -310,6 +310,7 @@ ul {
 .navbar-img {
     height: 4rem;
     margin: 0 auto;
+    cursor: pointer;
 }
 
 @media screen and (max-width: 768px) {
