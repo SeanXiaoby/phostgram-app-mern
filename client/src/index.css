@@ -406,17 +406,18 @@ ul {
 
 .footer-icon-container {
     margin: 0 auto;
+    display: grid;
+    width: 350px;
+    grid-template-columns: repeat(5, auto);
 }
 
 @media screen and (max-width: 768px) {
-    /* .footer-icon-container {
-        display: grid;
-        grid-template-columns: 1fr;
-    } */
-
     .footer {
-
         text-align: left;
+    }
+
+    .footer-icon-container {
+        margin-left: 0;
     }
 }
 
@@ -431,7 +432,7 @@ ul {
 .footer-icon {
     transition: var(--transition);
     cursor: pointer;
-    margin: 0 1rem;
+    /* margin: 0 1rem; */
 }
 
 .footer-icon:hover {
