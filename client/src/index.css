@@ -10,7 +10,6 @@
     box-sizing: border-box;
 }
 
-
 html {
     font-size: 100%;
 }
@@ -576,6 +575,14 @@ ul {
     margin: 10rem auto;
     /* background: var(--primary-100); */
     transition: var(--transition);
+}
+
+@media screen and (max-width: 768px) {
+
+    .landing-form {
+        margin: 3rem auto;
+    }
+
 }
 
 .landing-form:hover {
