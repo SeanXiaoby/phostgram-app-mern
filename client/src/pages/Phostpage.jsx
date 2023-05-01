@@ -1,13 +1,23 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { sample_phosts } from "../data/data.js";
 import { formatDate } from "../utils/util_date";
 import { VscComment } from "react-icons/vsc";
 import CommentRow from "../components/CommentRow";
+import { useLocation } from "react-router";
 
 const Phostpage = () => {
   const [phost, setPhost] = React.useState(sample_phosts[1]);
+
+  const location = useLocation();
+  const myAnchor = useRef(null);
+
+  if (location.hash === "#phostpage-comments") {
+    useEffect(() => {
+      myAnchor.current.scrollIntoView({ behavior: "smooth" });
+    }, []);
+  }
 
   return (
     <>
@@ -45,6 +55,7 @@ const Phostpage = () => {
             <div
               className="phostpage-info-comments-title"
               id="phostpage-comments"
+              ref={myAnchor}
             >
               <p>Comments</p>
               <VscComment className="phostpage-info-comments-logo" />
