@@ -4,11 +4,12 @@ const sample_phosts = [
     author: {
       id: "2000001",
       username: "SeanSheep",
-      avatar: "https://i.pravatar.cc/150?img=66",
+      avatar:
+        "https://avatars.githubusercontent.com/u/52678828?s=400&u=ab9a7f86686e9e800fd21a7d0ceb55f1dbddd1c3&v=4",
     },
     img: "https://pic4.zhimg.com/80/v2-0124b4257f6b8c303ba3f87d89f92073_720w.webp",
     text: "This is a test post and this is a very good post. This is about the actor of Professor Snape who is a one of my favourite character in the whole series of HP",
-    created_at: "2016-01-01 00:00:00",
+    created_at: "2023-05-01 23:01:26",
     comments: [
       {
         id: "3000001",
@@ -18,6 +19,16 @@ const sample_phosts = [
           avatar: "https://i.pravatar.cc/150?img=66",
         },
         text: "This is a test comment",
+        created_at: "2020-11-13 09:12:25",
+      },
+      {
+        id: "3000003",
+        author: {
+          id: "2000001",
+          username: "SeanSheep",
+          avatar: "https://i.pravatar.cc/150?img=66",
+        },
+        text: "This is a test comment on another post by another user who is not the author of the post but the author of the comment on the post, which is a very long sentence. I hope this is long enough to test the UI of the comment section.",
         created_at: "2016-01-01 00:00:00",
       },
       {
@@ -50,7 +61,17 @@ const sample_phosts = [
           username: "SeanSheep",
           avatar: "https://i.pravatar.cc/150?img=66",
         },
-        text: "This is a test comment",
+        text: "This is a test comment on another post by another user who is not the author of the post but the author of the comment on the post, which is a very long sentence. I hope this is long enough to test the UI of the comment section.",
+        created_at: "2016-01-01 00:00:00",
+      },
+      {
+        id: "3000003",
+        author: {
+          id: "2000001",
+          username: "SeanSheep",
+          avatar: "https://i.pravatar.cc/150?img=66",
+        },
+        text: "This is a test comment on another post by another user who is not the author of the post but the author of the comment on the post, which is a very long sentence. I hope this is long enough to test the UI of the comment section.",
         created_at: "2016-01-01 00:00:00",
       },
     ],
@@ -87,6 +108,18 @@ const sample_phosts = [
         created_at: "2016-01-01 00:00:00",
       },
     ],
+  },
+  {
+    id: "100004",
+    author: {
+      id: "2000001",
+      username: "SeanSheep",
+      avatar: "https://i.pravatar.cc/150?img=66",
+    },
+    img: "https://pic4.zhimg.com/80/v2-0124b4257f6b8c303ba3f87d89f92073_720w.webp",
+    text: "This is a test post",
+    created_at: "2016-01-01 00:00:00",
+    comments: [],
   },
 ];
 

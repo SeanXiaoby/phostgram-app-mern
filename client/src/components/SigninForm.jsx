@@ -33,7 +33,7 @@ const SigninForm = ({ changeType }) => {
       <button type="button" className="btn btn-block">
         Sign in
       </button>
-      <p onClick={() => changeType("signup")}>Sign up</p>
+      <p onClick={() => (window.location.href = "/landing/signup")}>Sign up</p>
     </div>
   );
 };
