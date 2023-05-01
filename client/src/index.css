@@ -11,8 +11,6 @@
 }
 
 
-
-
 html {
     font-size: 100%;
 }
@@ -312,6 +310,7 @@ ul {
 .navbar-img {
     height: 4rem;
     margin: 0 auto;
+    cursor: pointer;
 }
 
 @media screen and (max-width: 768px) {
@@ -320,7 +319,7 @@ ul {
     }
 
     .navbar {
-        padding: 1rem 0.5rem;
+        padding: 0.5rem 0.5rem;
     }
 
 }
@@ -569,4 +568,31 @@ ul {
     /* display: inline; */
     font-size: var(--small-text);
     margin-top: -1px
+}
+
+/* Landing page */
+
+.landing-form {
+    margin: 10rem auto;
+    /* background: var(--primary-100); */
+    transition: var(--transition);
+}
+
+.landing-form:hover {
+    box-shadow: var(--shadow-3);
+}
+
+.landing-form-content {
+    margin: 2rem auto;
+}
+
+.landing-form button {
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.landing-form p {
+    margin: 0 auto;
+    text-align: center;
+    cursor: pointer;
 }
