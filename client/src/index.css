@@ -397,7 +397,7 @@ ul {
     text-align: center;
     background: var(--grey-700);
     color: var(--white);
-    width: 100vw;
+    width: 100%;
 }
 
 .footer h5 {
@@ -473,8 +473,8 @@ ul {
 .notfound-page-content {
     background: var(--primary-100);
     margin: 0 auto;
-    width: 100vw;
-    max-width: 100vw;
+    width: 100%;
+    max-width: 100%;
     text-align: center;
 }
 
