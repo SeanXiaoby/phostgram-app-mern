@@ -1,6 +1,6 @@
 import React from "react";
 
-const SigninForm = () => {
+const SigninForm = ({ changeType }) => {
   return (
     <div className="form landing-form">
       <div className="title">
@@ -33,7 +33,7 @@ const SigninForm = () => {
       <button type="button" className="btn btn-block">
         Sign in
       </button>
-      <p>Sign up</p>
+      <p onClick={() => changeType("signup")}>Sign up</p>
     </div>
   );
 };

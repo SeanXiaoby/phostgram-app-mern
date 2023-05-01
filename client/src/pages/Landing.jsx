@@ -6,6 +6,7 @@ import SignupForm from "../components/SignupForm";
 
 const Landing = () => {
   const [landingType, setLandingType] = useState("signin");
+
   const changeLandingType = (type) => {
     if (type === "signin" || type === "signup") {
       setLandingType(type);
@@ -18,7 +19,11 @@ const Landing = () => {
     <>
       <Navbar />
       <div className="page-content">
-        {landingType === "signin" ? <SigninForm /> : <SignupForm />}
+        {landingType === "signin" ? (
+          <SigninForm changeType={changeLandingType} />
+        ) : (
+          <SignupForm changeType={changeLandingType} />
+        )}
       </div>
       <Footer />
     </>
