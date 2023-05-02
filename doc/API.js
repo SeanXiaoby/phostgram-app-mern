@@ -1,239 +1,116 @@
-# API Documentations
-
----
-
-<!-- ## Table of Contents
-
-- [API Documentations](#api-documentations)
-  - [Table of Contents](#table-of-contents)
-  - [Authentication](#authentication)
-    - [Login](#login)
-    - [Register](#register)
-    - [Logout](#logout) -->
-
-## Data Schemas
-
-#### User
-
-```js
-user: {
-    id: String!,
-    username: String!,
-    email: String!,
-    avatar: String,
-    phost: [phost]!,
-}
-```
-
-#### Author
-
-```js
-author:{
-    id: String!,
-    username: String!,
-    avatar: String!,
-}
-```
-
-#### Phost
-
-```js
-phost: {
-    id: String!,
-    author: <Author>!,
-    img: String!,
-    text: String!,
-    created_at: ISOstring!,
-    comments: [Comment]!,
-}
-```
-
-#### Comment
-
-```js
-comment: {
-    id: String!,
-    author: <Author>!,
-    text: String!,
-}
-```
-
-#### Error
-
-```js
-error: {
-    message: string,
-}
-```
-
----
-
-## Authentication
-
-APIS for authentication.
-
----
-
-### Login
-
-- #### POST `/api/auth/login`
-
-**Header** :
- `{ }`
-
-**Query Parameters** :
- `{ }`
-
-**Body Parameters** : 
-```js
-{
-    username: String!,
-    password: String!
-}
-```
-
-**Response** :
-
-- If success : Code: 200, Body: `{token: String}`
-- If fail : Code: 401, Body: `{token: null, error: {Error}}`
-
-**Descriptions** :
-
-- `username` can be either username or email
-
----
-
-### Register
-
-- #### POST `/api/auth/register`
-
-**Body Parameters** : 
-```js
-{
-    email: String!, 
-    username: String!, 
-    password: String!
-}
-```
-
-**Response** :
-- If success : Code: 200, Body: `{user_id: String}`
-- If fail, user not found : Code: 404, Body: `{user_id: null, error: {Error}}`
-- If fail, other error : Code: 401, Body: `{user_id: null, error: {Error}}`
-
-**Desciptions** :
-
-1. Validation will be finished in frontend. No need to validate in backend.
-
----
-
-### Logout
-
-- #### POST `/api/auth/logout`
-
-**Body Parameters** : 
-
-```js
-{session_id: String!}
-```
-
-**Response** :
-
-- If success : Code: 200, Body: `{ }`
-- If fail : Code: 401, Body: `{error: {Error}}`
-
----
-
-## Phost
-
-APIS for phosts CRUD operations.
-
-### Get
-
-- #### GET `/api/phost`
-
-Get all phosts
-
-**Body Parameters** : 
-
-```js
-{ } // Maybe some query filters can be added
-```
-
-**Response** :
-
-- If success : Code: 200, Body: `{phosts: [phost]}`
-- If fails: Code: 401, Body: `{error: {Error}}`
-
-**Notes** :
-
-  Return 200 with an empty array if there is no phost found.
-
----
-
-- #### GET `/api/phost/:id`
-
-Get a certain phost with its id.
-
-**Path Parameters** : 
-
-```js
-{id: string! }
-```
-
-**Response** :
-
-- If found: Code: 200, Body: `{phost: <phost>}`
-- If not found: Code: 404, Body: `{phost: null, error: {Error}}`
-- If fails: Code: 401, Body: `{phost: null, error: {Error}}`
-
----
-
-### Create
-
-- #### POST `/api/phost`
-
-Create a new phost.
-
-**Body Parameters** : 
-
-```js
-{
-    author: <author>!,
-    img: String!,
-    text: String!,
-}
-```
-
-**Respnose** :
-
-- If success: Code 200 Body:`{id: string}`
-- If fails with bad parameters: Code 409 Body: `{id: null, error: {Error}}`
-- If fails with other reasons, Code 401 Body: `{id: null, error: {Error}}`
-
-**Notes** :
-
-Images should be stored on external servers. We only passes image urls between backend and frontend
-
----
-
-### Comment
-
----
-
-### Update
-
----
-
-## User
-
-### Get
-
----
-
-### Create
-
----
-
-### Update
-
+const express = require('express');
+const bodyParser = require('body-parser');
+const app = express();
+
+const port = 3000;
+
+// Data Schemas
+const User = {
+  id: 'String!',
+  username: 'String!',
+  email: 'String!',
+  avatar: 'String',
+  phost: '[phost]!',
+};
+
+const Author = {
+  id: 'String!',
+  username: 'String!',
+};
+
+const Phost = {
+  id: 'String!',
+  author: '<Author>!',
+  img: 'String!',
+  text: 'String!',
+  created_at: 'ISOstring!',
+  comments: '[Comment]!',
+};
+
+const Comment = {
+  id: 'String!',
+  author: '<Author>!',
+  text: 'String!',
+};
+
+const Error = {
+  message: 'string',
+};
+
+// Mock user data
+const users = [
+    {
+      id: 1,
+      username: 'BoyangXiao',
+      password: 'password123',
+      email: 'sean@123.com',
+    },
+    {
+      id: 2,
+      username: 'YuanfengLi',
+      password: 'password456',
+      email: 'ryan@123.com',
+    },
+  ];
+
+// Authentication APIs
+app.post('/api/auth/login', (req, res) => {
+  // Login API
+  const { username, password } = req.body;
+  const user = users.find((user) => user.username === username && user.password === password);
+
+  if (!user) {
+    return res.status(401).json({ token: null, error: { message: 'Invalid username or password' } });
+  }
+
+  // Generate a JWT token
+  const token = jwt.sign({ userId: user.id }, SECRET_KEY, { expiresIn: '1h' });
+
+  res.status(200).json({ token });
+});
+
+app.post('/api/auth/register', (req, res) => {
+  // Register API
+});
+
+app.post('/api/auth/logout', (req, res) => {
+  // Logout API
+});
+
+// Phost APIs
+app.get('/api/phost', (req, res) => {
+  // Get all phosts API
+});
+
+app.get('/api/phost/:id', (req, res) => {
+  // Get a certain phost with its id API
+});
+
+app.post('/api/phost', (req, res) => {
+  // Create a new phost API
+});
+
+app.post('/api/comment', (req, res) => {
+  // Create a new comment API
+});
+
+app.put('/api/phost/:id', (req, res) => {
+  // Update a certain phost with its id API
+});
+
+// User APIs
+app.get('/api/user/:id', (req, res) => {
+  // Get a certain user with its id API
+});
+
+app.post('/api/user', (req, res) => {
+  // Create a new user API
+});
+
+app.put('/api/user/:id', (req, res) => {
+  // Update a certain user with its id API
+});
+
+app.listen(port, () => {
+  console.log(`App listening at http://localhost:${port}`);
+});
