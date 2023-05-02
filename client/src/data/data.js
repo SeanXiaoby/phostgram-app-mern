@@ -50,7 +50,7 @@ const sample_phosts = [
       username: "JohnDoe",
       avatar: "https://i.pravatar.cc/150?img=19",
     },
-    img: "https://pic4.zhimg.com/80/v2-9fbe6cca59a3389fdedb50cbaa265db3_720w.webp",
+    img: "https://www.slashonline.com/wp-content/uploads/2021/10/20210530-2161-1-1.jpg",
     text: "This is another test post",
     created_at: "2016-01-01 00:00:00",
     comments: [
@@ -83,8 +83,8 @@ const sample_phosts = [
       username: "SeanSheep",
       avatar: "https://i.pravatar.cc/150?img=66",
     },
-    img: "https://pic4.zhimg.com/80/v2-0124b4257f6b8c303ba3f87d89f92073_720w.webp",
-    text: "This is a test post",
+    img: "https://assets.toptal.io/images?url=https://bs-uploads.toptal.io/blackfish-uploads/components/blog_post_page/content/cover_image_file/cover_image/1129718/retina_500x200_cover-cold-dive-into-react-native-a-beginners-tutorial-922a625efe84a4c2d782343b333b0bdb.png",
+    text: "React is a great framework",
     created_at: "2016-01-01 00:00:00",
     comments: [
       {
@@ -116,7 +116,7 @@ const sample_phosts = [
       username: "SeanSheep",
       avatar: "https://i.pravatar.cc/150?img=66",
     },
-    img: "https://pic4.zhimg.com/80/v2-0124b4257f6b8c303ba3f87d89f92073_720w.webp",
+    img: "https://pic4.zhimg.com/80/v2-9fbe6cca59a3389fdedb50cbaa265db3_720w.webp",
     text: "This is a test post",
     created_at: "2016-01-01 00:00:00",
     comments: [],
