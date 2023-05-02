@@ -58,12 +58,22 @@ class dbAPI {
 
   async authenticateUser(username, password) {
     const user = await this._users.findOne({ username });
+
     if (user === null) return null;
+
     if (user.password === password) {
       return user._id.toString();
     }
 
     return null;
+  }
+
+  async sessionIsAlreadyLogin(user_id) {
+    const session = await this._session.findOne({
+      user_id: new ObjectId(user_id),
+    });
+    if (session === null) return null;
+    return session._id.toString();
   }
 
   async sessionLogin(user_id) {
@@ -82,7 +92,10 @@ class dbAPI {
   }
 
   async sessionLogout(session_id) {
-    if (ObjectId.isValid(session_id));
+    if (!ObjectId.isValid(session_id)) {
+      return null;
+    }
+
     const session = await this._session.findOne({
       _id: new ObjectId(session_id),
     });

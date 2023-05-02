@@ -1,97 +1,145 @@
 const express = require("express");
 const db = require("./models/db.js");
-const { MongoClient, ObjectId } = require("mongodb");
+const bodyParser = require("body-parser");
 const dotenv = require("dotenv");
 const app = express();
 const PORT = 3001;
 
+app.use(express.static("public"));
+
+// Body parser middleware
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
 app.get("/ping", async (req, res, next) => {
   res.status(204).send();
+  return next();
 });
-
-app.get("/user", async (req, res, next) => {
-  const info = req.body;
-  const user_id = await db.insertUser(info);
-
-  res.status(200).send(user_id);
-});
-// Initiate the server
 
 // Authentication APIs
 app.post("/api/auth/login", async (req, res, next) => {
   // Login API
   const info = req.body;
 
-  if (info === undefined) {
-    return res
-      .status(401)
-      .json({ token: null, error: { message: "Empty body" } });
+  if (info === undefined || info === null) {
+    res.status(400).json({ error: { message: "Empty body" } });
+    return next();
+  } else if (info.username === undefined || info.password === undefined) {
+    res.status(400).json({ error: { message: "Empty body" } });
+    return next();
   }
 
-  if (info.username === null) {
-    return res
-      .status(401)
-      .json({ token: null, error: { message: "Please enter username" } });
+  if ((await db.findUserName(info.username)) === null) {
+    res
+      .status(404)
+      .json({ error: { message: "username error" }, field: "username" });
+    return next();
+  } else if (
+    (await db.authenticateUser(info.username, info.password)) === null
+  ) {
+    res
+      .status(404)
+      .json({ error: { message: "password error" }, field: "password" });
+    return next();
   }
-  if (info.password === null) {
-    return res
-      .status(401)
-      .json({ token: null, error: { message: "Please enter password" } });
-  }
-  const ret = await db.authenticateUser(info.username, info.password);
-  if (ret === null) {
-    return res.status(401).json({
-      token: null,
-      error: { message: "Invalid username or password" },
+
+  const previous_session_id = await db.sessionIsAlreadyLogin(
+    await db.findUserName(info.username)
+  );
+
+  if (previous_session_id !== null) {
+    res.status(409).json({
+      error: { message: "already logged in" },
+      session_id: previous_session_id,
     });
+    return next();
   }
-  return res.status(200).json({ token: ret._id });
+
+  const session_id = await db.sessionLogin(
+    await db.findUserName(info.username)
+  );
+
+  if (session_id === null) {
+    res.status(401).json({ error: { message: "login failed" } });
+    return next();
+  }
+
+  res.status(200).json({ session_id: session_id });
+  return next();
 });
 
 app.post("/api/auth/register", async (req, res, next) => {
   // Register API
   const info = req.body;
-  if (info === undefined) {
-    return res
-      .status(401)
-      .json({ token: null, error: { message: "Empty body" } });
+  const required_keys = ["email", "username", "password"];
+
+  if (info === undefined || info === null) {
+    res.status(400).json({ error: { message: "Empty body" } });
+    return next();
   }
-  if (info.username === null) {
-    return res
-      .status(401)
-      .json({ user_id: null, error: { message: "Please enter username" } });
+
+  for (const key of required_keys) {
+    if (info[key] === undefined) {
+      res.status(400).json({ error: { message: "empty fields" }, field: key });
+      return next();
+    }
   }
-  if (info.password === null) {
-    return res
-      .status(401)
-      .json({ user_id: null, error: { message: "Please enter password" } });
+
+  if ((await db.findUserName(info.username)) !== null) {
+    res.status(409).json({
+      error: { message: "username already exists" },
+      field: "username",
+    });
+    return next();
+  } else if ((await db.findUserEmail(info.email)) !== null) {
+    res.status(409).json({
+      error: { message: "username already exists" },
+      field: "email",
+    });
+    return next();
   }
-  if (info.email === null) {
-    return res
-      .status(401)
-      .json({ user_id: null, error: { message: "Please enter email" } });
-  }
-  const ret = await db.insertUser(info.email, info.username, info.password);
-  if (ret === null) {
-    return res
+
+  const user_id = await db.insertUser(info.username, info.password, info.email);
+  if (user_id === null) {
+    res
       .status(401)
       .json({ user_id: null, error: { message: "Register failed" } });
+    return next();
   }
-  return res.status(200).json({ user_id: ret._id });
+
+  res.status(200).json({ user_id: user_id });
+  next();
 });
 
 app.post("/api/auth/logout", async (req, res, next) => {
   // Logout API
-  if (info === undefined) {
-    return res
-      .status(401)
-      .json({ token: null, error: { message: "Empty body" } });
+  const info = req.body;
+
+  if (info === undefined || info === null) {
+    res.status(400).json({ error: { message: "Empty body" } });
+    return next();
+  } else if (info.session_id === undefined) {
+    res.status(400).json({ error: { message: "Empty session" } });
+    return next();
   }
-  const ret = await db.sessionLogout(info.username);
-  if (ret === null) {
-    return res.status(401).json({ error: { message: "Logout failed" } });
+
+  const user_id = await db.sessionLogout(info.session_id);
+
+  if (user_id === null) {
+    res.status(401).json({ error: { message: "logout failed" } });
+    return next();
   }
-  return res.status(200).json();
+
+  res.status(200).json({ user_id: user_id });
+});
+
+app.use((req, res, next) => {
+  console.log(
+    `Request received: ${req.method} ${
+      req.url
+    } @ ${new Date().toLocaleTimeString()}`
+  );
+  next();
 });
 
 (async () => {
