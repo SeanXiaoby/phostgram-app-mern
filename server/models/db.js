@@ -5,13 +5,12 @@ const dotenv = require("dotenv");
 class dbAPI {
   constructor() {
     dotenv.config();
-    // let uri =
-    //   process.env.mongoSource === "atlas"
-    //     ? process.env.atlas_mongoURI
-    //     : process.env.local_mongoURI;
-    const uri =
-      "mongodb+srv://boyangxiao:1998629@cluster0.lfbgty1.mongodb.net/?retryWrites=true&w=majority&useUnifiedTopology=true";
-    // console.log(process.env.mongoSource);
+    let uri =
+      process.env.mongoSource === "atlas"
+        ? process.env.atlas_mongoURI
+        : process.env.local_mongoURI;
+    // const uri =
+    //   "mongodb+srv://boyangxiao:1998629@cluster0.lfbgty1.mongodb.net/?retryWrites=true&w=majority&useUnifiedTopology=true";
     this._client = new MongoClient(uri);
   }
 
