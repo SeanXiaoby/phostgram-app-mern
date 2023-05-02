@@ -87,7 +87,7 @@ app.post("/api/auth/logout", async (req, res, next) => {
       .status(401)
       .json({ token: null, error: { message: "Empty body" } });
   }
-  const ret = await db.sessionLogout(info.username);
+  const ret = await db.sessionLogout(info.session_id);
   if (ret === null) {
     return res.status(401).json({ error: { message: "Logout failed" } });
   }
