@@ -38,15 +38,13 @@ const CreateBox = () => {
         </div>
       ) : (
         <div className="create-img-frame preview-frame">
-          <div className="create-img-inner-frame preview-inner-frame">
-            {PreviewSource && (
-              <img
-                src={PreviewSource}
-                alt="preview"
-                className="create-preview-img"
-              />
-            )}
-          </div>
+          {PreviewSource && (
+            <img
+              src={PreviewSource}
+              alt="preview"
+              className="create-preview-img"
+            />
+          )}
         </div>
       )}
 

@@ -868,12 +868,12 @@ ul {
     filter: none;
 }
 
-.preview-inner-frame img {
+.preview-frame img {
     width: 100%;
     height: 100%;
 }
 
-.preview-inner-frame img:hover {
+.preview-frame img:hover {
     filter: none;
 }
 
