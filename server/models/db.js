@@ -29,32 +29,78 @@ class dbAPI {
     this._phosts = this._db.collection("phosts");
     this._session = this._db.collection("session");
   }
+
+  async findUserId(user_id) {
+    const user = await this._users.findOne({ _id : new ObjectId( user_id) });
+    if (user === null) {
+      return null;
+    }
+    const {_id, ...res} = user;
+    res.id = _id.toString();
+    return res;
+  }
   
 
-  async findUser(username) {
+  async findUserName(username) {
     const user = await this._users.findOne({ username });
     if (user !== null) {
       return user._id.toString();
     }
-    return user;
+    return null;
+  }
+
+  async findUserEmail(email) {
+    const user = await this._users.findOne({ email });
+    if (user !== null) {
+      return user._id.toString();
+    }
+    return null;
   }
 
   async authenticateUser(username, password) {
-    const user = await this._users.findOne({ username, password });
-    return user;
+    
+    const user = await this._users.findOne({ username });
+    if(user === null) return null;
+    if(user.password === password) {
+      return user._id.toString();
+    }
+
+    return null;
+
   }
 
-  async insertUser(info) {
-    const { insertedId: mid } = await this._users.insertOne({
-      username: "Sean",
-      password: "123456",
-    });
-    console.log(mid.toString());
+  async sessionLogin(user_id) {
 
-    const user = await this._users.findOne({ username: "Sean1" });
+    if(await this.findUserId(user_id) === null) return null;
 
-    // console.log(user);
+    const {insertedId: mid} = await this._session.insertOne({ user_id: new ObjectId(user_id), login_time: new Date() });
+    
+    if(mid !== null && mid !== undefined){
+      return mid.toString();
+    }else{
+      return null;
+    }
+  }
 
+  async sessionLogout(session_id) {
+    if(ObjectId.isValid(session_id));
+    const session = await this._session.findOne({_id: new ObjectId(session_id)});
+
+    if(session === null)  return null;
+
+    const {deletedCount} = await this._session.deleteOne({_id: new ObjectId(session_id)});
+
+    if(deletedCount === 1){
+      return session.user_id.toString();
+    }else{
+      return null;
+    }
+    
+  };
+
+  async insertUser(username, password, email, avatar = null) {
+    const { insertedId: mid } = await this._users.insertOne({username, password, email, avatar});
+    if(mid === null) return null;
     return mid.toString();
   }
 
