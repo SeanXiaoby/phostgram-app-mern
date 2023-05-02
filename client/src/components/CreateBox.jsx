@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { AiOutlineVideoCameraAdd } from "react-icons/ai";
 
 const CreateBox = () => {
   const [ImageUploaded, setImageUploaded] = useState(false);
@@ -48,7 +49,13 @@ const CreateBox = () => {
   return (
     <div className="create-content form">
       {ImageUploaded === false ? (
-        <div className="create-img-frame">
+        <div
+          className="create-img-frame"
+          onClick={() => {
+            console.log("clicked");
+            document.getElementById("create-img-input").click();
+          }}
+        >
           <div className="create-img-inner-frame">
             <input
               type="file"
@@ -58,7 +65,11 @@ const CreateBox = () => {
               accept="image/*"
               onChange={handleFileInputChange}
             />
-            <h5>- Choose your photo -</h5>
+            {/* <h5>- Choose your photo -</h5> */}
+            <AiOutlineVideoCameraAdd
+              className="create-content-icon"
+              size={100}
+            />
           </div>
         </div>
       ) : (
