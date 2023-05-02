@@ -27,6 +27,21 @@ class dbAPI {
     this._users = this._db.collection("users");
     this._log = this._db.collection("log");
     this._phosts = this._db.collection("phosts");
+    this._session = this._db.collection("session");
+  }
+  
+
+  async findUser(username) {
+    const user = await this._users.findOne({ username });
+    if (user !== null) {
+      return user._id.toString();
+    }
+    return user;
+  }
+
+  async authenticateUser(username, password) {
+    const user = await this._users.findOne({ username, password });
+    return user;
   }
 
   async insertUser(info) {
@@ -38,10 +53,12 @@ class dbAPI {
 
     const user = await this._users.findOne({ username: "Sean1" });
 
-    console.log(user);
+    // console.log(user);
 
     return mid.toString();
   }
+
+
 }
 
 const db = new dbAPI();
