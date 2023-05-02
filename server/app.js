@@ -27,39 +27,36 @@ app.post('/api/auth/login', async (req, res, next) => {
   if (info.password === null) {
     return res.status(401).json({ token: null, error: { message: 'Please enter password' } });
   }
-  const ret = await db.findUser(info.username);
+  const ret = await db.authenticateUser(info.username, info.password);
   if (ret === null) {
     return res.status(401).json({ token: null, error: { message: 'Invalid username or password' } });
   }
   return res.status(200).json({ token: ret._id });
-  // // Generate a JWT token
-  // const token = jwt.sign({ userId: user.id }, SECRET_KEY, { expiresIn: '1h' });
 
-  // res.status(200).json({ token });
 });
 
 app.post('/api/auth/register', async (req, res, next) => {
   // Register API
   const info = req.body;
   if (info.username === null) {
-    return res.status(401).json({ token: null, error: { message: 'Please enter username' } });
+    return res.status(401).json({ user_id: null, error: { message: 'Please enter username' } });
   }
   if (info.password === null) {
-    return res.status(401).json({ token: null, error: { message: 'Please enter password' } });
+    return res.status(401).json({ user_id: null, error: { message: 'Please enter password' } });
   }
   if (info.email === null) {
-    return res.status(401).json({ token: null, error: { message: 'Please enter email' } });
+    return res.status(401).json({ user_id: null, error: { message: 'Please enter email' } });
   }
-  const ret = await db.registerUser(info.email, info.username, info.password);
+  const ret = await db.insertUser(info.email, info.username, info.password);
   if (ret === null) {
-    return res.status(401).json({ token: null, error: { message: 'Register failed' } });
+    return res.status(401).json({ user_id: null, error: { message: 'Register failed' } });
   }
-  return res.status(200).json({ token: ret._id });
+  return res.status(200).json({ user_id: ret._id });
 });
 
 app.post('/api/auth/logout', async (req, res, next) => {
   // Logout API
-  const ret = await db.registerUser(info.username);
+  const ret = await db.sessionLogout(info.username);
   if (ret === null) {
     return res.status(401).json({ error: { message: 'Logout failed'} });
   }
