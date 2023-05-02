@@ -399,6 +399,7 @@ ul {
     background: var(--grey-700);
     color: var(--white);
     width: 100%;
+    z-index: 9999;
 }
 
 .footer h5 {
@@ -607,6 +608,36 @@ ul {
         max-width: 100%;
     }
 
+}
+
+.home-create-btn-container {
+    width: 4rem;
+    aspect-ratio: 1;
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    border-radius: 50%;
+    /* border-radius: var(--border-radius); */
+    /* border: 2px solid var(--grey-400); */
+    box-shadow: var(--shadow-3);
+    z-index: 9998;
+}
+
+.home-create-btn-container:hover {
+    box-shadow: var(--shadow-4);
+}
+
+.home-create-btn {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.home-create-btn-icon {
+    position: relative;
+    top: 1px;
 }
 
 /* Landing page */
