@@ -27,6 +27,7 @@ class dbAPI {
     this._users = this._db.collection("users");
     this._log = this._db.collection("log");
     this._phosts = this._db.collection("phosts");
+    this._session = this._db.collection("session");
   }
 
   async insertUser(info) {
