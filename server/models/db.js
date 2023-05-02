@@ -11,7 +11,7 @@ class dbAPI {
     //     : process.env.local_mongoURI;
     const uri =
       "mongodb+srv://boyangxiao:1998629@cluster0.lfbgty1.mongodb.net/?retryWrites=true&w=majority&useUnifiedTopology=true";
-    console.log(process.env.mongoSource);
+    // console.log(process.env.mongoSource);
     this._client = new MongoClient(uri);
   }
 
