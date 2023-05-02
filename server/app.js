@@ -131,6 +131,7 @@ app.post("/api/auth/logout", async (req, res, next) => {
   }
 
   res.status(200).json({ user_id: user_id });
+  next();
 });
 
 app.use((req, res, next) => {
