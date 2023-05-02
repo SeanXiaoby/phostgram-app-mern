@@ -15,10 +15,15 @@ const CreateBox = () => {
 
   const handleFileInputChange = (e) => {
     console.log(e.target.files);
-    setImageUploaded(true);
+
     const file = e.target.files[0];
     previewImg(file);
+
+    setImageUploaded(true);
+    setSelectedImage(file);
   };
+
+  const handleSubmitPhost = () => {};
 
   return (
     <div className="create-content form">
@@ -65,6 +70,7 @@ const CreateBox = () => {
             className=" btn btn-block"
             type="submit"
             style={{ textTransform: "none" }}
+            onSubmit={handleSubmitPhost}
           >
             Phost it!
           </button>
