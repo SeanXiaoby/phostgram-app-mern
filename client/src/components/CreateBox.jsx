@@ -13,6 +13,21 @@ const CreateBox = () => {
     };
   };
 
+  const uploadImage = async (base64EncodedImage) => {
+    console.log(base64EncodedImage);
+    try {
+      const res = await fetch("/", {
+        method: "POST",
+        body: JSON.stringify({ data: base64EncodedImage }),
+        headers: { "Content-Type": "application/json" },
+      });
+
+      console.log(res);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const handleFileInputChange = (e) => {
     console.log(e.target.files);
 
@@ -23,7 +38,12 @@ const CreateBox = () => {
     setSelectedImage(file);
   };
 
-  const handleSubmitPhost = () => {};
+  const handleSubmitPhost = async () => {
+    console.log("submitting");
+    if (PreviewSource !== null) {
+      await uploadImage(PreviewSource);
+    }
+  };
 
   return (
     <div className="create-content form">
@@ -70,7 +90,7 @@ const CreateBox = () => {
             className=" btn btn-block"
             type="submit"
             style={{ textTransform: "none" }}
-            onSubmit={handleSubmitPhost}
+            onClick={handleSubmitPhost}
           >
             Phost it!
           </button>
