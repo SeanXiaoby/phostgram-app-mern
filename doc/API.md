@@ -40,7 +40,7 @@ author:{
 ```js
 phost: {
     id: String!,
-    author: <Author>!,
+    author_id: String,
     img: String!,
     text: String!,
     created_at: ISOstring!,
@@ -53,7 +53,7 @@ phost: {
 ```js
 comment: {
     id: String!,
-    author: <Author>!,
+    author_id: String!,
     text: String!,
 }
 ```
@@ -199,7 +199,7 @@ Create a new phost.
 
 ```js
 {
-    author: <author>!,
+    author_id: String!,
     img: String!,
     text: String!,
 }
@@ -208,7 +208,7 @@ Create a new phost.
 **Respnose** :
 
 - If success: Code 200 Body:`{id: string}`
-- If fails with bad parameters: Code 409 Body: `{id: null, error: {Error}}`
+- If fails with bad parameters: Code 400 Body: `{id: null, error: {Error}}`
 - If fails with other reasons, Code 401 Body: `{id: null, error: {Error}}`
 
 **Notes** :
