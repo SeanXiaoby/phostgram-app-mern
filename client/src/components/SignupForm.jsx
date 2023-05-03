@@ -9,7 +9,7 @@ import { serverInfo } from "../data/serverInfo";
 const SignupForm = ({ changeType }) => {
   const [submitted, setSubmitted] = useState(false);
   const [status, setStatus] = useState({ success: false, message: "" });
-  const [received, setReceived] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const fetchData = async (url, path, input_data) => {
     const response = await fetch(url + path, {
@@ -25,6 +25,7 @@ const SignupForm = ({ changeType }) => {
   };
 
   const handleSignUp = async () => {
+    setLoading(true);
     setSubmitted(true);
 
     console.log(serverInfo);
@@ -36,25 +37,25 @@ const SignupForm = ({ changeType }) => {
 
     if (!isValidEmail(email)) {
       setStatus({ success: false, message: "Invalid email format" });
-      setReceived(true);
+      setLoading(false);
       return;
     }
 
     if (!isValidUsername(username)) {
       setStatus({ success: false, message: "Invalid username format" });
-      setReceived(true);
+      setLoading(false);
       return;
     }
 
     if (!isValidPassword(password)) {
       setStatus({ success: false, message: "Invalid password" });
-      setReceived(true);
+      setLoading(false);
       return;
     }
 
     if (password !== confirm) {
       setStatus({ success: false, message: "Passwords do not match!" });
-      setReceived(true);
+      setLoading(false);
       return;
     }
 
@@ -76,14 +77,14 @@ const SignupForm = ({ changeType }) => {
 
       statusCode = res.statusCode;
       data = res.data;
-
-      setReceived(true);
     } catch (error) {
       setStatus({
         success: false,
         message: "Something went wrong! Please try again later!",
       });
     }
+
+    setLoading(false);
 
     if (statusCode === 200) {
       setStatus({
@@ -170,7 +171,7 @@ const SignupForm = ({ changeType }) => {
       </div>
 
       {submitted &&
-        received &&
+        !loading &&
         (status.success ? (
           <div className="alert alert-success">{status.message}</div>
         ) : (
@@ -178,8 +179,7 @@ const SignupForm = ({ changeType }) => {
         ))}
 
       <button type="button" className="btn btn-block" onClick={handleSignUp}>
-        Sign up{" "}
-        {submitted && !received && <div className="loading signer-loading" />}
+        Sign up {loading && <div className="loading signer-loading" />}
       </button>
       <p id="to-signin" onClick={() => changeType("signin")}>
         Sign in
