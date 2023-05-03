@@ -12,7 +12,7 @@ const SignupForm = ({ changeType }) => {
   const [received, setReceived] = useState(false);
 
   const fetchData = async (url, path, input_data) => {
-    const response = await fetch(url + "/api/auth/register", {
+    const response = await fetch(url + path, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
