@@ -180,6 +180,7 @@ ul {
     width: 100%;
 }
 
+
 /* alerts */
 .alert {
     padding: 0.375rem 0.75rem;
@@ -263,6 +264,15 @@ ul {
     border: 3px solid var(--grey-400);
     border-top-color: var(--primary-700);
     animation: spinner 1s linear infinite;
+}
+
+.loading-inline {
+    display: inline-block;
+    height: 1rem;
+    position: relative;
+    top: 2px;
+    width: 1rem;
+    margin: 0 0;
 }
 
 /* title */
@@ -1116,6 +1126,10 @@ ul {
 
 .edit-user-log-out-btn:hover {
     background-color: rgb(175, 63, 63);
+}
+
+.edit-user-alert {
+    margin: 0.5rem auto;
 }
 
 .edit-user-hide-icon {
