@@ -49,8 +49,6 @@ const SigninForm = ({ changeType }) => {
     setLoading(true);
     setSubmitted(true);
 
-    console.log(serverInfo);
-
     const username = document.getElementById("signin-username").value;
     const password = document.getElementById("signin-password").value;
 
@@ -104,7 +102,6 @@ const SigninForm = ({ changeType }) => {
         });
         return;
       } else {
-        console.log(user_id);
         localStorage.setItem("user_id", user_id);
       }
 

@@ -25,8 +25,6 @@ const EditUserContent = ({ user }) => {
     const session_id = localStorage.getItem("session_id");
     const user_id = localStorage.getItem("user_id");
 
-    console.log(session_id, user_id);
-
     if (session_id === null) {
       localStorage.removeItem("user_id");
       localStorage.removeItem("session_id");
