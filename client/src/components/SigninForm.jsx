@@ -11,7 +11,7 @@ const SigninForm = ({ changeType }) => {
   const navigate = useNavigate();
   const [submitted, setSubmitted] = useState(false);
   const [status, setStatus] = useState({ success: false, message: "" });
-  const [received, setReceived] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const fetchData = async (url, path, input_data) => {
     const response = await fetch(url + path, {
@@ -27,6 +27,7 @@ const SigninForm = ({ changeType }) => {
   };
 
   const handleSignin = async () => {
+    setLoading(true);
     setSubmitted(true);
 
     console.log(serverInfo);
@@ -36,13 +37,13 @@ const SigninForm = ({ changeType }) => {
 
     if (!isValidUsername(username)) {
       setStatus({ success: false, message: "Invalid username format" });
-      setReceived(true);
+      setLoading(false);
       return;
     }
 
     if (!isValidPassword(password)) {
       setStatus({ success: false, message: "Invalid password" });
-      setReceived(true);
+      ssetLoading(false);
       return;
     }
 
@@ -59,14 +60,14 @@ const SigninForm = ({ changeType }) => {
 
       statusCode = res.statusCode;
       data = res.data;
-
-      setReceived(true);
     } catch (error) {
       setStatus({
         success: false,
         message: "Something went wrong! Please try again later!",
       });
     }
+
+    setLoading(false);
 
     if (statusCode === 200) {
       setStatus({
@@ -135,7 +136,7 @@ const SigninForm = ({ changeType }) => {
         </div>
       </div>
       {submitted &&
-        received &&
+        !loading &&
         (status.success ? (
           <div className="alert alert-success">{status.message}</div>
         ) : (
@@ -143,8 +144,7 @@ const SigninForm = ({ changeType }) => {
         ))}
 
       <button type="button" className="btn btn-block" onClick={handleSignin}>
-        Sign in{" "}
-        {submitted && !received && <div className="loading signer-loading" />}
+        Sign in {loading && <div className="loading signer-loading" />}
       </button>
       <p
         onClick={() => {
