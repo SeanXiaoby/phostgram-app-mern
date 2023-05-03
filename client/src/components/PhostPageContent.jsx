@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { formatDate } from "../utils/util_date";
 import { VscComment } from "react-icons/vsc";
+import { FaCat } from "react-icons/fa";
 import CommentRow from "../components/CommentRow";
 
 import { useLocation } from "react-router";
@@ -52,7 +53,7 @@ const PhostPageContent = ({ phost }) => {
             ref={myAnchor}
           >
             <p>Comments</p>
-            <VscComment className="phostpage-info-comments-logo" />
+            <FaCat className="phostpage-info-comments-logo" />
           </div>
 
           <div className="phostpage-comments">
