@@ -151,7 +151,7 @@ class dbAPI {
 
     return {
       id: phost._id.toString(),
-      author: phost.author,
+      author_id: phost.author_id,
       img: phost.img,
       text: phost.text,
       created_at: phost.created_at,
@@ -164,7 +164,7 @@ class dbAPI {
     return phosts.map((phost) => {
       return {
         id: phost._id.toString(),
-        author: phost.author,
+        author_id: phost.author_id,
         img: phost.img,
         text: phost.text,
         created_at: phost.created_at,
