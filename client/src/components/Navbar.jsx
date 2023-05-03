@@ -1,11 +1,21 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
+import { sample_users } from "../data/data";
 import hero from "../img/hero.png";
 import Avatar from "./Avatar";
 import Signer from "./Signer";
 
 const Navbar = () => {
-  const { user, setUser } = useState(localStorage.getItem("user"));
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    if (sessionStorage.getItem("session_id") !== null) {
+      setUser(sample_users[0]);
+    } else {
+      setUser(null);
+    }
+  }, []);
+
   const location = useLocation();
 
   const navigate = useNavigate();
@@ -29,7 +39,7 @@ const Navbar = () => {
           onClick={() => handleHome()}
         />
       </div>
-      {user === undefined ? (
+      {user === null ? (
         location.pathname === "/landing/signin" ||
         location.pathname === "/landing/signup" ? (
           <></>
