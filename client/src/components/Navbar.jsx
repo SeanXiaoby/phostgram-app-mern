@@ -21,6 +21,10 @@ const Navbar = () => {
     navigate("/");
   };
 
+  const handleClickAvatar = () => {
+    navigate(`/user/${user}`);
+  };
+
   return (
     <div className="navbar">
       <div className="navbar-img-container">
@@ -35,7 +39,7 @@ const Navbar = () => {
       location.pathname === "/landing/signup" ? (
         <></>
       ) : session !== null ? (
-        <Avatar />
+        <Avatar user={user} handleClick={handleClickAvatar} />
       ) : (
         <Signer
           handleToSignIn={handleToSignIn}

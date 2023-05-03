@@ -1,16 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import default_avatar from "../img/default_avatar.jpg";
+import { useState } from "react";
 
 const Avatar = (props) => {
-  let { user_avatar } = props;
-  user_avatar = user_avatar === undefined ? null : user_avatar;
+  let { user, handleClick } = props;
+  const [userAvatar, setUserAvatar] = useState(null);
+  useEffect(() => {}, []);
 
   return (
     <div className="avatar-container">
       <img
         className="avatar-img"
-        src={user_avatar === null ? default_avatar : user_avatar}
+        src={userAvatar === null ? default_avatar : userAvatar}
         alt="avatar"
+        onClick={() => handleClick()}
       />
     </div>
   );
