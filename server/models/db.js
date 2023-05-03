@@ -5,12 +5,12 @@ const dotenv = require("dotenv");
 class dbAPI {
   constructor() {
     dotenv.config();
-    let uri =
-      process.env.mongoSource === "atlas"
-        ? process.env.atlas_mongoURI
-        : process.env.local_mongoURI;
-    // const uri =
-    //   "mongodb+srv://boyangxiao:1998629@cluster0.lfbgty1.mongodb.net/?retryWrites=true&w=majority&useUnifiedTopology=true";
+    // let uri =
+    //   process.env.mongoSource === "atlas"
+    //     ? process.env.atlas_mongoURI
+    //     : process.env.local_mongoURI;
+    const uri =
+      "mongodb+srv://boyangxiao:1998629@cluster0.lfbgty1.mongodb.net/?retryWrites=true&w=majority&useUnifiedTopology=true";
     this._client = new MongoClient(uri);
   }
 
@@ -123,6 +123,54 @@ class dbAPI {
     });
     if (mid === null) return null;
     return mid.toString();
+  }
+
+  async insertPhost(info) {
+    // if ((await this.getUser(info.author)) === null) {
+    //   return null;
+    // }
+
+    const { insertedId: mid } = await this._phosts.insertOne({
+      ...info,
+      img:
+        info.img === null
+          ? "https://liftlearning.com/wp-content/uploads/2020/09/default-image.png"
+          : info.img,
+      created_at: new Date().toISOString(),
+      comments: [],
+    });
+
+    if (mid === null) return null;
+    return mid.toString();
+  }
+
+  async getPhost(phost_id) {
+    const phost = await this._phosts.findOne({ _id: new ObjectId(phost_id) });
+
+    if (phost === null) return null;
+
+    return {
+      id: phost._id.toString(),
+      author: phost.author,
+      img: phost.img,
+      text: phost.text,
+      created_at: phost.created_at,
+      comments: phost.comments,
+    };
+  }
+
+  async getAllPhosts() {
+    const phosts = await this._phosts.find({}).toArray();
+    return phosts.map((phost) => {
+      return {
+        id: phost._id.toString(),
+        author: phost.author,
+        img: phost.img,
+        text: phost.text,
+        created_at: phost.created_at,
+        comments: phost.comments,
+      };
+    });
   }
 }
 
