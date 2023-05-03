@@ -1038,3 +1038,94 @@ ul {
     box-shadow: var(--shadow-2);
     filter: brightness(60%)
 }
+
+/* Edit page */
+
+.edit-user {
+
+    width: 90%;
+    max-width: var(--fixed-width);
+    text-align: center;
+    margin: 1rem auto;
+}
+
+.edit-user-avatar {
+    width: 13%;
+    min-width: 4rem;
+    max-width: 8rem;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    margin: 2rem auto;
+    margin-bottom: 0;
+    border: 2px solid var(--grey-200);
+    box-shadow: var(--shadow-1);
+    transition: var(--transition);
+}
+
+.edit-user-avatar:hover {
+    box-shadow: var(--shadow-4);
+}
+
+@media screen and (max-width: 768px) {
+    .edit-user-avatar {
+        width: 5rem;
+    }
+}
+
+.edit-user-form {
+    /* width: 80%; */
+    margin: 2rem auto;
+    margin-bottom: 3rem;
+    border-bottom: 1px solid var(--grey-500);
+}
+
+.edit-user-form-row {
+    height: auto;
+    border-top: 1px solid var(--grey-500);
+    display: grid;
+    grid-template-columns: 45% 50%;
+    gap: 5%;
+    justify-content: center;
+}
+
+.edit-user-form-row p {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    transition: var(--transition);
+}
+
+.edit-user-p-left {
+    font-weight: 600;
+    justify-content: right;
+}
+
+.edit-user-p-right {
+    justify-content: left;
+    color: #504acc;
+}
+
+.edit-user button {
+    margin: 0.5rem auto;
+}
+
+.edit-user-log-out-btn {
+    background-color: rgb(255, 91, 91);
+}
+
+.edit-user-log-out-btn:hover {
+    background-color: rgb(175, 63, 63);
+}
+
+.edit-user-hide-icon {
+    display: inline-block;
+    color: var(--grey-600);
+    margin-left: 1rem;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.edit-user-hide-icon:hover {
+    color: var(--primary-600);
+}
