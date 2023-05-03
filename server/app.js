@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require("cors");
 const db = require("./models/db.js");
 const bodyParser = require("body-parser");
 const dotenv = require("dotenv");
@@ -10,6 +11,8 @@ app.use(express.static("public"));
 // Body parser middleware
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+
+app.use(cors());
 
 app.get("/ping", async (req, res, next) => {
   res.status(204).send();
