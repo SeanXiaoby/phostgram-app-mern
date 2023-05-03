@@ -5,7 +5,8 @@ import Avatar from "./Avatar";
 import Signer from "./Signer";
 
 const Navbar = () => {
-  const { user, setUser } = useState(localStorage.getItem("session_id"));
+  const [user, setUser] = useState(localStorage.getItem("user_id"));
+  const [session, setSession] = useState(localStorage.getItem("session_id"));
 
   const location = useLocation();
 
@@ -30,18 +31,16 @@ const Navbar = () => {
           onClick={() => handleHome()}
         />
       </div>
-      {user === null ? (
-        location.pathname === "/landing/signin" ||
-        location.pathname === "/landing/signup" ? (
-          <></>
-        ) : (
-          <Signer
-            handleToSignIn={handleToSignIn}
-            handleToSignup={handleToSignup}
-          />
-        )
-      ) : (
+      {location.pathname === "/landing/signin" ||
+      location.pathname === "/landing/signup" ? (
+        <></>
+      ) : session !== null ? (
         <Avatar />
+      ) : (
+        <Signer
+          handleToSignIn={handleToSignIn}
+          handleToSignup={handleToSignup}
+        />
       )}
     </div>
   );
