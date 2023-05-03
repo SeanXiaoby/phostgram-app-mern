@@ -1,20 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { sample_users } from "../data/data";
 import hero from "../img/hero.png";
 import Avatar from "./Avatar";
 import Signer from "./Signer";
 
 const Navbar = () => {
-  const [user, setUser] = useState(null);
-
-  useEffect(() => {
-    if (sessionStorage.getItem("session_id") !== null) {
-      setUser(sample_users[0]);
-    } else {
-      setUser(null);
-    }
-  }, []);
+  const [user, setUser] = useState(localStorage.getItem("user_id"));
+  const [session, setSession] = useState(localStorage.getItem("session_id"));
 
   const location = useLocation();
 
@@ -29,6 +21,10 @@ const Navbar = () => {
     navigate("/");
   };
 
+  const handleClickAvatar = () => {
+    navigate(`/user/${user}/edit`);
+  };
+
   return (
     <div className="navbar">
       <div className="navbar-img-container">
@@ -39,18 +35,16 @@ const Navbar = () => {
           onClick={() => handleHome()}
         />
       </div>
-      {user === null ? (
-        location.pathname === "/landing/signin" ||
-        location.pathname === "/landing/signup" ? (
-          <></>
-        ) : (
-          <Signer
-            handleToSignIn={handleToSignIn}
-            handleToSignup={handleToSignup}
-          />
-        )
+      {location.pathname === "/landing/signin" ||
+      location.pathname === "/landing/signup" ? (
+        <></>
+      ) : session !== null ? (
+        <Avatar user={user} handleClick={handleClickAvatar} />
       ) : (
-        <Avatar />
+        <Signer
+          handleToSignIn={handleToSignIn}
+          handleToSignup={handleToSignup}
+        />
       )}
     </div>
   );

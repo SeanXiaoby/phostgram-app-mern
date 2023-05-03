@@ -26,11 +26,28 @@ const SigninForm = ({ changeType }) => {
     return { statusCode, data };
   };
 
+  const UpdateLocalUser = async (session_id) => {
+    const response = await fetch(
+      serverInfo.url + `/api/auth/session/${session_id}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    if (response.status !== 200) {
+      fetchData(serverInfo.url, "/api/auth/logout", { session_id: session_id });
+      return null;
+    } else {
+      return (await response.json()).user_id;
+    }
+  };
+
   const handleSignin = async () => {
     setLoading(true);
     setSubmitted(true);
-
-    console.log(serverInfo);
 
     const username = document.getElementById("signin-username").value;
     const password = document.getElementById("signin-password").value;
@@ -43,7 +60,7 @@ const SigninForm = ({ changeType }) => {
 
     if (!isValidPassword(password)) {
       setStatus({ success: false, message: "Invalid password" });
-      ssetLoading(false);
+      setLoading(false);
       return;
     }
 
@@ -75,7 +92,18 @@ const SigninForm = ({ changeType }) => {
         message: "Sign in successful!",
       });
 
-      sessionStorage.setItem("session_id", data.session_id);
+      localStorage.setItem("session_id", data.session_id);
+      const user_id = await UpdateLocalUser(data.session_id);
+
+      if (user_id === null) {
+        setStatus({
+          success: false,
+          message: "Something went wrong! Please try again later!",
+        });
+        return;
+      } else {
+        localStorage.setItem("user_id", user_id);
+      }
 
       setTimeout(() => {
         navigate("/");

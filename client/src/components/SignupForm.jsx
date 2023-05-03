@@ -89,11 +89,11 @@ const SignupForm = ({ changeType }) => {
     if (statusCode === 200) {
       setStatus({
         success: true,
-        message: "Sign up successful! Directing to Sign-in page in 3 seconds!",
+        message: "Sign up successful! Directing to Sign-in page!",
       });
       setTimeout(() => {
         document.getElementById("to-signin").click();
-      }, 3000);
+      }, 2000);
     } else {
       if (statusCode === 400) {
         setStatus({
