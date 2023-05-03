@@ -114,6 +114,25 @@ app.post("/api/auth/register", async (req, res, next) => {
   next();
 });
 
+app.get("/api/auth/session/:id", async (req, res, next) => {
+  const session_id = req.params.id;
+
+  if (session_id === undefined || session_id === null) {
+    res.status(400).json({ error: { message: "Empty session" } });
+    return next();
+  }
+
+  const user_id = await db.sessionFindUser(session_id);
+
+  if (user_id === null) {
+    res.status(404).json({ error: { message: "session not found" } });
+    return next();
+  } else {
+    res.status(200).json({ user_id: user_id });
+    return next();
+  }
+});
+
 app.post("/api/auth/logout", async (req, res, next) => {
   // Logout API
   const info = req.body;

@@ -23,8 +23,8 @@ const testLogin = () => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      username: "Max",
-      password: "123456",
+      username: "123",
+      password: "123",
     }),
   })
     .then((res) => res.json())
@@ -39,8 +39,20 @@ const testLogout = () => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      session_id: "6451903ecc078c98c7273a9f",
+      session_id: "6451f24fccd75317a3f4873d",
     }),
+  })
+    .then((res) => res.json())
+    .then((data) => console.log(data));
+};
+
+// Find user by session id/
+const testSessionFindUser = () => {
+  fetch("http://localhost:3001/api/auth/session/6451f24fccd75317a3f4873d", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
   })
     .then((res) => res.json())
     .then((data) => console.log(data));
@@ -48,3 +60,4 @@ const testLogout = () => {
 
 // testLogin();
 // testLogout();
+// testSessionFindUser();
