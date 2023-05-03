@@ -75,7 +75,7 @@ const SigninForm = ({ changeType }) => {
         message: "Sign in successful!",
       });
 
-      sessionStorage.setItem("session_id", data.session_id);
+      localStorage.setItem("session_id", data.session_id);
 
       setTimeout(() => {
         navigate("/");

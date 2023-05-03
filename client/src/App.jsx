@@ -5,6 +5,7 @@ import Landing from "./pages/Landing";
 import Notfound from "./pages/Notfound";
 import Phostpage from "./pages/Phostpage";
 import CreatePhost from "./pages/CreatePhost";
+import Userpage from "./pages/Userpage";
 
 const App = () => {
   return (
@@ -13,6 +14,7 @@ const App = () => {
       <Route path="/landing/:type" element={<Landing />} />
       <Route path="/phost/:id" element={<Phostpage />} />
       <Route path="/create" element={<CreatePhost />} />
+      <Route path="/user/:id" element={<Userpage />} />
       <Route path="*" exact={true} element={<Notfound />} />
     </Routes>
   );
