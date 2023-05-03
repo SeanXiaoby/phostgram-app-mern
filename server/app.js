@@ -147,24 +147,28 @@ app.use((req, res, next) => {
 });
 
 // Phost APIs
-app.get('/api/phost', async (req, res, next) => {
+app.get("/api/phost", async (req, res, next) => {
   // Get all phosts API
   const ret = await db.getAllPhosts();
   if (ret === null) {
-    res.status(401).json({ error: { message: "Can not get all phosts from server" } });
+    res
+      .status(401)
+      .json({ error: { message: "Can not get all phosts from server" } });
     return next();
   }
-  res.status(200).json(ret.map((phost) => {
-    return {
-      id: phost.id,
-    };
-  }));
+  res.status(200).json(
+    ret.map((phost) => {
+      return {
+        id: phost.id,
+      };
+    })
+  );
   return next();
 });
 
-app.get('/api/phost/:id', async (req, res, next) => {
+app.get("/api/phost/:id", async (req, res, next) => {
   // Get a certain phost with its id API
-  const info = req.body;
+  const info = req.params;
   if (info === undefined || info === null) {
     res.status(401).json({ error: { message: "Empty body" } });
     return next();
@@ -174,14 +178,17 @@ app.get('/api/phost/:id', async (req, res, next) => {
   }
   const ret = await db.getPhost(info.id);
   if (ret === null) {
-    res.status(404).json({ phost: null, error: { message: "Can not find the phost from server" }});
+    res.status(404).json({
+      phost: null,
+      error: { message: "Can not find the phost from server" },
+    });
     return next();
   }
-  res.status(200).json({ phost: ret});
+  res.status(200).json({ phost: ret });
   return next();
 });
 
-app.post('/api/phost', async (req, res, next) => {
+app.post("/api/phost", async (req, res, next) => {
   // Create a new phost API
   const info = req.body;
   if (info === undefined || info === null) {
@@ -199,18 +206,20 @@ app.post('/api/phost', async (req, res, next) => {
   }
   const ret = await db.insertPhost(info);
   if (ret === null) {
-    res.status(404).json({ id: null, error: { message: "Create phosst failed" } });
+    res
+      .status(404)
+      .json({ id: null, error: { message: "Create phosst failed" } });
     return next();
   }
   res.status(200).json({ id: ret });
-    return next();
+  return next();
 });
 
-app.post('/api/comment', (req, res) => {
+app.post("/api/comment", (req, res) => {
   // Create a new comment API
 });
 
-app.put('/api/phost/:id', (req, res) => {
+app.put("/api/phost/:id", (req, res) => {
   // Update a certain phost with its id API
 });
 
