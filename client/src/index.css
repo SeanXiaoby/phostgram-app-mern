@@ -675,6 +675,15 @@ ul {
     cursor: pointer;
 }
 
+.signer-loading {
+    display: inline-block;
+    height: 1rem;
+    position: relative;
+    top: 2px;
+    width: 1rem;
+    margin: 0 0;
+}
+
 /* Phost page */
 
 .phostpage-content {
