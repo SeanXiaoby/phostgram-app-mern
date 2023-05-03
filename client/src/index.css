@@ -509,6 +509,7 @@ ul {
     padding: 0 0.5rem;
     display: flex;
     align-items: center;
+
 }
 
 .phost-list-item-author img {
@@ -516,6 +517,7 @@ ul {
     width: 35px;
     border-radius: 50%;
     object-fit: cover;
+    cursor: pointer;
 }
 
 .phost-list-item-author p {
@@ -526,6 +528,7 @@ ul {
     color: var(--grey-800);
     text-transform: none;
     font-size: var(--small-text);
+    cursor: pointer;
 }
 
 .phost-list-item-author h5 {
@@ -564,6 +567,7 @@ ul {
     color: var(--primary-600);
     text-transform: none;
     font-size: var(--small-text);
+    cursor: pointer;
 }
 
 .phost-list-item-text p {
@@ -573,6 +577,7 @@ ul {
     color: var(--grey-800);
     text-transform: none;
     font-size: var(--small-text);
+    cursor: pointer;
 }
 
 .phost-list-item-comments {
@@ -727,6 +732,7 @@ ul {
     padding: 1rem 0rem;
     display: flex;
     align-items: center;
+
 }
 
 .phostpage-info-author img {
@@ -734,6 +740,7 @@ ul {
     width: 50px;
     border-radius: 50%;
     object-fit: cover;
+    cursor: pointer;
 
 }
 
@@ -745,6 +752,7 @@ ul {
     color: var(--primary-600);
     text-transform: none;
     font-size: normal;
+    cursor: pointer;
 }
 
 .phostpage-info-divider {
@@ -817,6 +825,7 @@ ul {
 .comment-row-username {
     font-weight: 500;
     color: var(--primary-600);
+    cursor: pointer;
 }
 
 

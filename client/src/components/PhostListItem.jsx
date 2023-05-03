@@ -9,12 +9,16 @@ const PhostListItem = ({ phost }) => {
 
   const navigate = useNavigate();
 
-  const handleClickImage = () => {
+  const handleClickPhost = () => {
     navigate(`/phost/${phost.id}`);
   };
 
   const handleClickComments = () => {
     navigate(`/phost/${phost.id}#phostpage-comments`);
+  };
+
+  const handleClickAuthor = (user_id) => {
+    navigate(`/user/${user_id}`);
   };
 
   return (
@@ -29,19 +33,26 @@ const PhostListItem = ({ phost }) => {
               : author.avatar
           }
           alt="avatar"
+          onClick={() => handleClickAuthor(author.id)}
         />
-        <p>{author === undefined ? "unknown" : author.username}</p>
+        <p onClick={() => handleClickAuthor(author.id)}>
+          {author === undefined ? "unknown" : author.username}
+        </p>
         <h5>· {getTimeDiff(new Date(created_at))}</h5>
       </div>
       <img
         className="phost-list-item-img"
         src={img}
         alt="phost-item-img"
-        onClick={() => handleClickImage()}
+        onClick={() => handleClickPhost()}
       />
       <div className="phost-list-item-text">
-        <h5>{author === undefined ? "unknown" : author.username}</h5>
-        <p>{text.length > 200 ? text.substring(0, 200) + "..." : text}</p>
+        <h5 onClick={() => handleClickAuthor(author.id)}>
+          {author === undefined ? "unknown" : author.username}
+        </h5>
+        <p onClick={handleClickPhost}>
+          {text.length > 200 ? text.substring(0, 200) + "..." : text}
+        </p>
       </div>
       <div className="phost-list-item-comments">
         <GoComment

@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { formatDate } from "../utils/util_date";
 import { VscComment } from "react-icons/vsc";
 import { FaCat } from "react-icons/fa";
@@ -9,12 +10,17 @@ import { useLocation } from "react-router";
 const PhostPageContent = ({ phost }) => {
   const location = useLocation();
   const myAnchor = useRef(null);
+  const navigate = useNavigate();
 
   if (location.hash === "#phostpage-comments") {
     useEffect(() => {
       myAnchor.current.scrollIntoView({ behavior: "smooth" });
     }, []);
   }
+
+  const handleClickAuthor = (user_id) => {
+    navigate(`/user/${user_id}`);
+  };
 
   return (
     <>
@@ -31,8 +37,9 @@ const PhostPageContent = ({ phost }) => {
                   : phost.author.avatar
               }
               alt="avatar"
+              onClick={() => handleClickAuthor(phost.author.id)}
             />
-            <p>
+            <p onClick={() => handleClickAuthor(phost.author.id)}>
               {phost.author === undefined ? "unknown" : phost.author.username}
             </p>
           </div>
