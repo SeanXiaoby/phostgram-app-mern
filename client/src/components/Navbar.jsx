@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import hero from "../img/hero.png";
 import Avatar from "./Avatar";
 import Signer from "./Signer";
 
 const Navbar = () => {
-  const { user, setUser } = useState(localStorage.getItem("user"));
+  const { user, setUser } = useState(localStorage.getItem("session_id"));
+
   const location = useLocation();
 
   const navigate = useNavigate();
@@ -29,7 +30,7 @@ const Navbar = () => {
           onClick={() => handleHome()}
         />
       </div>
-      {user === undefined ? (
+      {user === null ? (
         location.pathname === "/landing/signin" ||
         location.pathname === "/landing/signup" ? (
           <></>
