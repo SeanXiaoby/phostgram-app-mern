@@ -6,6 +6,7 @@ import Notfound from "./pages/Notfound";
 import Phostpage from "./pages/Phostpage";
 import CreatePhost from "./pages/CreatePhost";
 import Userpage from "./pages/Userpage";
+import EditUser from "./pages/EditUser";
 
 const App = () => {
   return (
@@ -15,6 +16,8 @@ const App = () => {
       <Route path="/phost/:id" element={<Phostpage />} />
       <Route path="/create" element={<CreatePhost />} />
       <Route path="/user/:id" element={<Userpage />} />
+      <Route path="/user/:id/edit" element={<EditUser />} />
+      <Route path="/error" exact={true} element={<Notfound />} />
       <Route path="*" exact={true} element={<Notfound />} />
     </Routes>
   );

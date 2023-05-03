@@ -4,7 +4,7 @@ import { sample_phosts, sample_users } from "../data/data";
 import { useNavigate } from "react-router-dom";
 
 const UserPageContent = ({ user }) => {
-  const [userData, setUserData] = useState(sample_users[0]);
+  const [userData, setUserData] = useState(user);
   const [userPhosts, setUserPhosts] = useState(sample_phosts);
   const navigate = useNavigate();
 

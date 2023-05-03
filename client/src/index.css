@@ -1009,7 +1009,13 @@ ul {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     min-width: 300px;
-    gap: 5px
+    gap: 2px;
+}
+
+@media screen and (max-width: 768px) {
+    .user-page-gallery {
+        gap: 1px
+    }
 }
 
 .user-page-gallery h4 {
