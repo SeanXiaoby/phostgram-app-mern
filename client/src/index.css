@@ -271,8 +271,10 @@ ul {
     height: 1rem;
     position: relative;
     top: 2px;
+    left: 1rem;
     width: 1rem;
     margin: 0 0;
+
 }
 
 /* title */
