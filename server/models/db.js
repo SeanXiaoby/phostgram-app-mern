@@ -1,6 +1,7 @@
 const { MongoClient, ObjectId } = require("mongodb");
 const fs = require("fs");
 const dotenv = require("dotenv");
+const { sortByIsoDate } = require("../utils/sort_date");
 
 class dbAPI {
   constructor() {
@@ -9,8 +10,7 @@ class dbAPI {
       process.env.mongoSource === "atlas"
         ? process.env.atlas_mongoURI
         : process.env.local_mongoURI;
-    // const uri =
-    //   "mongodb+srv://boyangxiao:1998629@cluster0.lfbgty1.mongodb.net/?retryWrites=true&w=majority&useUnifiedTopology=true";
+
     this._client = new MongoClient(uri);
   }
 
@@ -30,6 +30,9 @@ class dbAPI {
   }
 
   async findUserId(user_id) {
+    if (!ObjectId.isValid(user_id)) {
+      return null;
+    }
     const user = await this._users.findOne({ _id: new ObjectId(user_id) });
     if (user === null) {
       return null;
@@ -137,6 +140,94 @@ class dbAPI {
     });
     if (mid === null) return null;
     return mid.toString();
+  }
+
+  async insertPhost(info) {
+    // if ((await this.getUser(info.author)) === null) {
+    //   return null;
+    // }
+
+    const { insertedId: mid } = await this._phosts.insertOne({
+      ...info,
+      img:
+        info.img === null
+          ? "https://liftlearning.com/wp-content/uploads/2020/09/default-image.png"
+          : info.img,
+      created_at: new Date().toISOString(),
+      comments: [],
+    });
+
+    if (mid === null) return null;
+    return mid.toString();
+  }
+
+  async getPhost(phost_id) {
+    if (!ObjectId.isValid(phost_id)) {
+      return null;
+    }
+    const phost = await this._phosts.findOne({ _id: new ObjectId(phost_id) });
+
+    if (phost === null) return null;
+
+    return {
+      id: phost._id.toString(),
+      author_id: phost.author_id,
+      img: phost.img,
+      text: phost.text,
+      created_at: phost.created_at,
+      comments: phost.comments,
+    };
+  }
+
+  async getAllPhosts() {
+    const phosts = sortByIsoDate(await this._phosts.find({}).toArray());
+
+    return phosts.map((phost) => {
+      return {
+        id: phost._id.toString(),
+        author_id: phost.author_id,
+        img: phost.img,
+        text: phost.text,
+        created_at: phost.created_at,
+        comments: phost.comments,
+      };
+    });
+  }
+
+  async UpdateUserPhosts(user_id, phost_id) {
+    if ((await this._users.findOne({ _id: new ObjectId(user_id) })) === null)
+      return null;
+
+    const res = await this._users.updateOne(
+      { _id: new ObjectId(user_id) },
+      { $push: { phosts: phost_id } }
+    );
+    return res.user_id;
+  }
+
+  async getPhostsByUserId(user_id) {
+    if (!ObjectId.isValid(user_id)) {
+      return null;
+    }
+
+    const phosts = sortByIsoDate(
+      await this._phosts
+        .find({
+          author_id: user_id,
+        })
+        .toArray()
+    );
+
+    return phosts.map((phost) => {
+      return {
+        id: phost._id.toString(),
+        author_id: phost.author_id,
+        img: phost.img,
+        text: phost.text,
+        created_at: phost.created_at,
+        comments: phost.comments,
+      };
+    });
   }
 }
 

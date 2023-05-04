@@ -183,6 +183,131 @@ app.use((req, res, next) => {
   next();
 });
 
+// Phost APIs
+app.get("/api/phost", async (req, res, next) => {
+  // Get all phosts API
+  const ret = await db.getAllPhosts();
+  if (ret === null) {
+    res
+      .status(401)
+      .json({ error: { message: "Can not get all phosts from server" } });
+    return next();
+  }
+  res.status(200).json(
+    // ret.map((phost) => {
+    //   return {
+    //     id: phost.id,
+    //   };
+    // })
+    { phosts: ret }
+  );
+  return next();
+});
+
+app.get("/api/phost/:id", async (req, res, next) => {
+  // Get a certain phost with its id API
+  const info = req.params;
+  if (info === undefined || info === null) {
+    res.status(401).json({ error: { message: "Empty body" } });
+    return next();
+  } else if (info.id === undefined || info.id === null) {
+    res.status(401).json({ error: { message: "Invalid phost ID" } });
+    return next();
+  }
+  const ret = await db.getPhost(info.id);
+  if (ret === null) {
+    res.status(404).json({
+      phost: null,
+      error: { message: "Can not find the phost from server" },
+    });
+    return next();
+  }
+  res.status(200).json({ phost: ret });
+  return next();
+});
+
+app.post("/api/phost", async (req, res, next) => {
+  // Create a new phost API
+  const info = req.body;
+  console.log(info);
+  if (info === undefined || info === null) {
+    res.status(400).json({ error: { message: "Empty body" } });
+    return next();
+  } else if (info.author_id === undefined || info.author_id === null) {
+    res.status(400).json({ error: { message: "Invalid author ID" } });
+    return next();
+  } else if (info.img === undefined) {
+    res.status(400).json({ error: { message: "Invalid image" } });
+    return next();
+  } else if (info.text === undefined || info.text === null) {
+    res.status(400).json({ error: { message: "Invalid text" } });
+    return next();
+  }
+  const ret = await db.insertPhost(info);
+  if (ret === null) {
+    res
+      .status(404)
+      .json({ id: null, error: { message: "Create phosst failed" } });
+    return next();
+  }
+  const update_ret = await db.UpdateUserPhosts(info.author_id, ret);
+  if (update_ret === null) {
+    res
+      .status(404)
+      .json({ id: null, error: { message: "updateUserPhosts failed" } });
+    return next();
+  }
+  res.status(200).json({ phost_id: ret });
+  return next();
+});
+
+app.get("/api/user/:id/", async (req, res, next) => {
+  // Return user's all info.
+  // Body empty
+  const id = req.params.id;
+  if (id === undefined || id === null) {
+    res.status(400).json({ error: { message: "Invalid ID!" } });
+    return next();
+  }
+  const ret = await db.findUserId(id);
+  if (ret === null) {
+    res.status(401).json({ error: { message: "Get user info failed!" } });
+    return next();
+  }
+
+  res.status(200).json({
+    user: ret,
+  });
+  return next();
+});
+
+app.get("/api/user/:id/phosts", async (req, res, next) => {
+  // Body empty
+  const id = req.params.id;
+  if (id === undefined || id === null) {
+    res.status(400).json({ error: { message: "Invalid ID!" } });
+    return next();
+  }
+  const ret = await db.getPhostsByUserId(id);
+  if (ret === null) {
+    res.status(401).json({ error: { message: "Get user info failed!" } });
+    return next();
+  }
+
+  res.status(200).json({
+    phosts: ret,
+  });
+  return next();
+});
+
+app.post("/api/comment", (req, res) => {
+  // Create a new comment API
+});
+
+app.put("/api/phost/:id", (req, res) => {
+  // Update a certain phost with its id API
+});
+
 (async () => {
   console.log("Service is initialized!");
   console.log("Waiting for connecting to MongoDB...");
