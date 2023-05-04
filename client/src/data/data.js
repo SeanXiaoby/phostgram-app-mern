@@ -126,15 +126,17 @@ const sample_phosts = [
 const sample_users = [
   {
     id: "2000001",
-    username: "SeanSheep",
+    username: "Peter123",
     email: "sample@usc.edu",
-    avatar: "https://i.pravatar.cc/150?img=66",
+    password: "123123",
+    avatar: null,
     phost: [],
   },
   {
     id: "2000002",
-    username: "SeanDog",
+    username: "Michelle669",
     email: "sample2@usc.edu",
+    password: "123123",
     avatar: "https://i.pravatar.cc/150?img=19",
     phost: [],
   },

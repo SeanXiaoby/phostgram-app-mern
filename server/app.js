@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const db = require("./models/db.js");
+const { cloudinary } = require("./utils/cloudinary.js");
 const bodyParser = require("body-parser");
 const dotenv = require("dotenv");
 const app = express();
@@ -9,14 +10,31 @@ const PORT = 3001;
 app.use(express.static("public"));
 
 // Body parser middleware
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
+app.use(bodyParser.json({ limit: "50mb" }));
 
 app.use(cors());
 
 app.get("/ping", async (req, res, next) => {
   res.status(204).send();
   return next();
+});
+
+app.post("/api/uploadImg", async (req, res, next) => {
+  try {
+    const fileStr = req.body.data;
+
+    const uploadResponse = await cloudinary.uploader.upload(fileStr, {
+      upload_preset: "phostgram",
+    });
+
+    res.status(200).json({ img_url: uploadResponse.url });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: { message: "server error" } });
+    return next();
+  }
+  next();
 });
 
 // Authentication APIs
