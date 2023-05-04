@@ -211,7 +211,14 @@ app.post("/api/phost", async (req, res, next) => {
       .json({ id: null, error: { message: "Create phosst failed" } });
     return next();
   }
-  res.status(200).json({ id: ret });
+  ret = await db.updateUserPhosts(info.author_id, ret);
+  if (ret === null) {
+    res
+      .status(404)
+      .json({ id: null, error: { message: "updateUserPhosts failed" } });
+    return next();
+  }
+  res.status(200).json({ id: info.author_id });
   return next();
 });
 
