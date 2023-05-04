@@ -5,6 +5,7 @@ import { GoComment } from "react-icons/go";
 import { useNavigate } from "react-router";
 
 const PhostListItem = ({ phost }) => {
+  console.log(phost);
   const { author, img, text, created_at, comments } = phost;
 
   const navigate = useNavigate();
