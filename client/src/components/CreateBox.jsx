@@ -79,7 +79,7 @@ const CreateBox = () => {
     };
 
     try {
-      const res = await fetch(serverInfo.url + "/api/create", {
+      const res = await fetch(serverInfo.url + "/api/phost", {
         method: "POST",
         body: JSON.stringify(data),
         headers: { "Content-Type": "application/json" },
