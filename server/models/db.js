@@ -1,6 +1,7 @@
 const { MongoClient, ObjectId } = require("mongodb");
 const fs = require("fs");
 const dotenv = require("dotenv");
+const { sortByIsoDate } = require("../utils/sort_date");
 
 class dbAPI {
   constructor() {
@@ -179,7 +180,8 @@ class dbAPI {
   }
 
   async getAllPhosts() {
-    const phosts = await this._phosts.find({}).toArray();
+    const phosts = sortByIsoDate(await this._phosts.find({}).toArray());
+
     return phosts.map((phost) => {
       return {
         id: phost._id.toString(),
@@ -208,11 +210,13 @@ class dbAPI {
       return null;
     }
 
-    const phosts = await this._phosts
-      .find({
-        author_id: user_id,
-      })
-      .toArray();
+    const phosts = sortByIsoDate(
+      await this._phosts
+        .find({
+          author_id: user_id,
+        })
+        .toArray()
+    );
 
     return phosts.map((phost) => {
       return {
