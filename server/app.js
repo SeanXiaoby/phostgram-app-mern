@@ -194,11 +194,12 @@ app.get("/api/phost", async (req, res, next) => {
     return next();
   }
   res.status(200).json(
-    ret.map((phost) => {
-      return {
-        id: phost.id,
-      };
-    })
+    // ret.map((phost) => {
+    //   return {
+    //     id: phost.id,
+    //   };
+    // })
+    { phosts: ret }
   );
   return next();
 });
@@ -263,7 +264,7 @@ app.post("/api/phost", async (req, res, next) => {
 app.get("/api/user/:id/", async (req, res, next) => {
   // Return user's all info.
   // Body empty
-  const id = req.params.id
+  const id = req.params.id;
   console.log(id);
   if (id === undefined || id === null) {
     res.status(400).json({ error: { message: "Invalid ID!" } });
@@ -271,20 +272,17 @@ app.get("/api/user/:id/", async (req, res, next) => {
   }
   const ret = await db.findUserId(id);
   if (ret === null) {
-    res
-      .status(401)
-      .json({ error: { message: "Get user info failed!" } });
+    res.status(401).json({ error: { message: "Get user info failed!" } });
     return next();
   }
-  
+
   res.status(200).json(ret);
   return next();
 });
 
-
 app.get("/api/user/:id/phosts", async (req, res, next) => {
   // Body empty
-  const id = req.params.id
+  const id = req.params.id;
   console.log(id);
   if (id === undefined || id === null) {
     res.status(400).json({ error: { message: "Invalid ID!" } });
@@ -292,12 +290,10 @@ app.get("/api/user/:id/phosts", async (req, res, next) => {
   }
   const ret = await db.getPhostsByUserId(id);
   if (ret === null) {
-    res
-      .status(401)
-      .json({ error: { message: "Get user info failed!" } });
+    res.status(401).json({ error: { message: "Get user info failed!" } });
     return next();
   }
-  
+
   res.status(200).json(ret);
   return next();
 });
