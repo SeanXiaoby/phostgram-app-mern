@@ -4,8 +4,8 @@ import { formatDate } from "../utils/util_date";
 import { VscComment } from "react-icons/vsc";
 import { FaCat } from "react-icons/fa";
 import CommentRow from "../components/CommentRow";
-
 import { useLocation } from "react-router";
+import default_avatar from "../img/default_avatar.jpg";
 
 const PhostPageContent = ({ phost }) => {
   const location = useLocation();
