@@ -22,7 +22,6 @@ const PhostListItem = ({ phost }) => {
 
       if (response.status === 200) {
         const data = await response.json();
-        console.log(data);
         setAuthor(data.user === undefined ? null : data.user);
       } else {
         setAuthor(null);
