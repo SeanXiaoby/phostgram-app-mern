@@ -7,7 +7,7 @@ import CommentRow from "../components/CommentRow";
 import { useLocation } from "react-router";
 import default_avatar from "../img/default_avatar.jpg";
 
-const PhostPageContent = ({ phost }) => {
+const PhostPageContent = ({ phost, author }) => {
   const location = useLocation();
   const myAnchor = useRef(null);
   const navigate = useNavigate();
@@ -30,9 +30,9 @@ const PhostPageContent = ({ phost }) => {
           <div className="phostpage-info-author">
             <img
               src={
-                phost.author === undefined
+                author === null
                   ? default_avatar
-                  : phost.author.avatar === undefined
+                  : author.avatar === null
                   ? default_avatar
                   : phost.author.avatar
               }
@@ -40,7 +40,7 @@ const PhostPageContent = ({ phost }) => {
               onClick={() => handleClickAuthor(phost.author.id)}
             />
             <p onClick={() => handleClickAuthor(phost.author.id)}>
-              {phost.author === undefined ? "unknown" : phost.author.username}
+              {author === null ? "unknown" : author.username}
             </p>
           </div>
           <div className="phostpage-info-divider"></div>
