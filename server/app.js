@@ -260,6 +260,48 @@ app.post("/api/phost", async (req, res, next) => {
   return next();
 });
 
+app.get("/api/user/:id/", async (req, res, next) => {
+  // Return user's all info.
+  // Body empty
+  const id = req.params.id
+  console.log(id);
+  if (id === undefined || id === null) {
+    res.status(400).json({ error: { message: "Invalid ID!" } });
+    return next();
+  }
+  const ret = await db.findUserId(id);
+  if (ret === null) {
+    res
+      .status(401)
+      .json({ error: { message: "Get user info failed!" } });
+    return next();
+  }
+  
+  res.status(200).json(ret);
+  return next();
+});
+
+
+app.get("/api/user/:id/phosts", async (req, res, next) => {
+  // Body empty
+  const id = req.params.id
+  console.log(id);
+  if (id === undefined || id === null) {
+    res.status(400).json({ error: { message: "Invalid ID!" } });
+    return next();
+  }
+  const ret = await db.getPhostsByUserId(id);
+  if (ret === null) {
+    res
+      .status(401)
+      .json({ error: { message: "Get user info failed!" } });
+    return next();
+  }
+  
+  res.status(200).json(ret);
+  return next();
+});
+
 app.post("/api/comment", (req, res) => {
   // Create a new comment API
 });
