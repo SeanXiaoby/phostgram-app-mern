@@ -22,7 +22,6 @@ const CreateBox = () => {
   };
 
   const uploadImage = async (base64EncodedImage) => {
-    // console.log(base64EncodedImage);
     try {
       const res = await fetch(serverInfo.url + "/api/uploadImg", {
         method: "POST",
@@ -52,8 +51,6 @@ const CreateBox = () => {
   };
 
   const handleFileInputChange = (e) => {
-    console.log(e.target.files);
-
     const file = e.target.files[0];
     previewImg(file);
 
@@ -80,8 +77,6 @@ const CreateBox = () => {
       text: text,
       author_id: localStorage.getItem("user_id"),
     };
-
-    console.log(data);
 
     try {
       const res = await fetch(serverInfo.url + "/api/create", {
@@ -116,7 +111,6 @@ const CreateBox = () => {
         <div
           className="create-img-frame"
           onClick={() => {
-            console.log("clicked");
             document.getElementById("create-img-input").click();
           }}
         >
