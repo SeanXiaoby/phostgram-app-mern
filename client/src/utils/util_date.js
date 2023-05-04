@@ -29,7 +29,7 @@ function formatDate(date) {
   const formattedDay = day < 10 ? day.toString().substr(0, 1) : day;
   const formattedHours = hours < 10 ? "0" + hours : hours;
   const formattedMinutes = minutes < 10 ? "0" + minutes : minutes;
-  const formattedSeconds = hours < 10 ? "0" + seconds : seconds;
+  const formattedSeconds = seconds < 10 ? "0" + seconds : seconds;
 
   return `${year}.${formattedMonth}.${formattedDay} ${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
 }

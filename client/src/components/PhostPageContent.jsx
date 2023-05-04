@@ -37,9 +37,9 @@ const PhostPageContent = ({ phost, author }) => {
                   : phost.author.avatar
               }
               alt="avatar"
-              onClick={() => handleClickAuthor(phost.author.id)}
+              onClick={() => handleClickAuthor(author.id)}
             />
-            <p onClick={() => handleClickAuthor(phost.author.id)}>
+            <p onClick={() => handleClickAuthor(author.id)}>
               {author === null ? "unknown" : author.username}
             </p>
           </div>
