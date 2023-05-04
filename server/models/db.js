@@ -182,6 +182,7 @@ class dbAPI {
     );
     return res.user_id.toString(); 
   }
+  
 }
 
 const db = new dbAPI();
