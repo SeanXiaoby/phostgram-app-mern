@@ -29,6 +29,9 @@ class dbAPI {
   }
 
   async findUserId(user_id) {
+    if (!ObjectId.isValid(user_id)) {
+      return null;
+    }
     const user = await this._users.findOne({ _id: new ObjectId(user_id) });
     if (user === null) {
       return null;
@@ -195,7 +198,7 @@ class dbAPI {
 
     const res = await this._users.updateOne(
       { _id: new ObjectId(user_id) },
-      { $push: { phosts: new ObjectId(phost_id) } }
+      { $push: { phosts: phost_id } }
     );
     return res.user_id;
   }
@@ -207,9 +210,10 @@ class dbAPI {
 
     const phosts = await this._phosts
       .find({
-        author_id: new ObjectId(user_id),
+        author_id: user_id,
       })
       .toArray();
+
     return phosts.map((phost) => {
       return {
         id: phost._id.toString(),

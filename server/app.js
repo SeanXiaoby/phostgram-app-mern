@@ -265,7 +265,6 @@ app.get("/api/user/:id/", async (req, res, next) => {
   // Return user's all info.
   // Body empty
   const id = req.params.id;
-  console.log(id);
   if (id === undefined || id === null) {
     res.status(400).json({ error: { message: "Invalid ID!" } });
     return next();
@@ -276,14 +275,15 @@ app.get("/api/user/:id/", async (req, res, next) => {
     return next();
   }
 
-  res.status(200).json(ret);
+  res.status(200).json({
+    user: ret,
+  });
   return next();
 });
 
 app.get("/api/user/:id/phosts", async (req, res, next) => {
   // Body empty
   const id = req.params.id;
-  console.log(id);
   if (id === undefined || id === null) {
     res.status(400).json({ error: { message: "Invalid ID!" } });
     return next();
@@ -294,7 +294,9 @@ app.get("/api/user/:id/phosts", async (req, res, next) => {
     return next();
   }
 
-  res.status(200).json(ret);
+  res.status(200).json({
+    phosts: ret,
+  });
   return next();
 });
 
