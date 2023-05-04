@@ -112,6 +112,20 @@ class dbAPI {
     }
   }
 
+  async sessionFindUser(session_id) {
+    if (!ObjectId.isValid(session_id)) {
+      return null;
+    }
+
+    const session = await this._session.findOne({
+      _id: new ObjectId(session_id),
+    });
+
+    if (session === null) return null;
+
+    return session.user_id.toString();
+  }
+
   async insertUser(username, password, email, avatar = null) {
     const { insertedId: mid } = await this._users.insertOne({
       username,
