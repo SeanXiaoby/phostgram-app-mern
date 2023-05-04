@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { AiOutlineVideoCameraAdd } from "react-icons/ai";
-// import cloudinary from "../utils/util_cloudinary";
 
 const CreateBox = () => {
   const [ImageUploaded, setImageUploaded] = useState(false);
