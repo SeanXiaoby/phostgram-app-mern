@@ -60,7 +60,19 @@ const EditUserContent = ({ user }) => {
       setTimeout(() => {
         navigate("/");
       }, 1000);
+    } else if (response.status === 404) {
+      localStorage.removeItem("user_id");
+      localStorage.removeItem("session_id");
+      setStatus({
+        success: false,
+        message: "Seems you are not logged in! Please login again!",
+      });
+      setTimeout(() => {
+        navigate("/landing/login");
+      }, 2000);
     } else {
+      localStorage.removeItem("user_id");
+      localStorage.removeItem("session_id");
       setStatus({
         success: false,
         message: "Something went wrong! Please try again!",
@@ -111,7 +123,14 @@ const EditUserContent = ({ user }) => {
         </div>
       </div>
 
-      <button className="btn btn-block">Create Phost</button>
+      <button
+        className="btn btn-block"
+        onClick={() => {
+          navigate("/create");
+        }}
+      >
+        Create Phost
+      </button>
       <button
         className="btn btn-block edit-user-log-out-btn"
         onClick={handleLogout}
