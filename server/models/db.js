@@ -5,12 +5,11 @@ const dotenv = require("dotenv");
 class dbAPI {
   constructor() {
     dotenv.config();
-    // let uri =
-    //   process.env.mongoSource === "atlas"
-    //     ? process.env.atlas_mongoURI
-    //     : process.env.local_mongoURI;
-    const uri =
-      "mongodb+srv://boyangxiao:1998629@cluster0.lfbgty1.mongodb.net/?retryWrites=true&w=majority&useUnifiedTopology=true";
+    let uri =
+      process.env.mongoSource === "atlas"
+        ? process.env.atlas_mongoURI
+        : process.env.local_mongoURI;
+
     this._client = new MongoClient(uri);
   }
 
@@ -199,6 +198,28 @@ class dbAPI {
       { $push: { phosts: new ObjectId(phost_id) } }
     );
     return res.user_id;
+  }
+
+  async getPhostsByUserId(user_id) {
+    if (!ObjectId.isValid(user_id)) {
+      return null;
+    }
+
+    const phosts = await this._phosts
+      .find({
+        author_id: new ObjectId(user_id),
+      })
+      .toArray();
+    return phosts.map((phost) => {
+      return {
+        id: phost._id.toString(),
+        author_id: phost.author_id,
+        img: phost.img,
+        text: phost.text,
+        created_at: phost.created_at,
+        comments: phost.comments,
+      };
+    });
   }
 }
 
