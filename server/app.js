@@ -228,13 +228,14 @@ app.get("/api/phost/:id", async (req, res, next) => {
 app.post("/api/phost", async (req, res, next) => {
   // Create a new phost API
   const info = req.body;
+  console.log(info);
   if (info === undefined || info === null) {
     res.status(400).json({ error: { message: "Empty body" } });
     return next();
   } else if (info.author_id === undefined || info.author_id === null) {
     res.status(400).json({ error: { message: "Invalid author ID" } });
     return next();
-  } else if (info.img === undefined || info.img === null) {
+  } else if (info.img === undefined) {
     res.status(400).json({ error: { message: "Invalid image" } });
     return next();
   } else if (info.text === undefined || info.text === null) {
@@ -248,14 +249,14 @@ app.post("/api/phost", async (req, res, next) => {
       .json({ id: null, error: { message: "Create phosst failed" } });
     return next();
   }
-  ret = await db.updateUserPhosts(info.author_id, ret);
-  if (ret === null) {
+  const update_ret = await db.UpdateUserPhosts(info.author_id, ret);
+  if (update_ret === null) {
     res
       .status(404)
       .json({ id: null, error: { message: "updateUserPhosts failed" } });
     return next();
   }
-  res.status(200).json({ id: info.author_id });
+  res.status(200).json({ phost_id: ret });
   return next();
 });
 

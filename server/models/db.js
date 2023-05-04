@@ -159,6 +159,9 @@ class dbAPI {
   }
 
   async getPhost(phost_id) {
+    if (!ObjectId.isValid(phost_id)) {
+      return null;
+    }
     const phost = await this._phosts.findOne({ _id: new ObjectId(phost_id) });
 
     if (phost === null) return null;
@@ -187,16 +190,16 @@ class dbAPI {
     });
   }
 
-  async UpdateUserPhosts(user_id, phost_id){
-    const user = await this._users.findOne({user_id});
-    if ((await this._users.findOne(user_id)) === null) return null;
+  async UpdateUserPhosts(user_id, phost_id) {
+    if ((await this._users.findOne({ _id: new ObjectId(user_id) })) === null)
+      return null;
+
     const res = await this._users.updateOne(
-      { id: user_id},
-      { $push:{ phost: phost_id}}
+      { _id: new ObjectId(user_id) },
+      { $push: { phosts: new ObjectId(phost_id) } }
     );
-    return res.user_id.toString(); 
+    return res.user_id;
   }
-  
 }
 
 const db = new dbAPI();
