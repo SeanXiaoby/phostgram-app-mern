@@ -4,10 +4,10 @@ import { formatDate } from "../utils/util_date";
 import { VscComment } from "react-icons/vsc";
 import { FaCat } from "react-icons/fa";
 import CommentRow from "../components/CommentRow";
-
 import { useLocation } from "react-router";
+import default_avatar from "../img/default_avatar.jpg";
 
-const PhostPageContent = ({ phost }) => {
+const PhostPageContent = ({ phost, author }) => {
   const location = useLocation();
   const myAnchor = useRef(null);
   const navigate = useNavigate();
@@ -30,17 +30,17 @@ const PhostPageContent = ({ phost }) => {
           <div className="phostpage-info-author">
             <img
               src={
-                phost.author === undefined
+                author === null
                   ? default_avatar
-                  : phost.author.avatar === undefined
+                  : author.avatar === null
                   ? default_avatar
                   : phost.author.avatar
               }
               alt="avatar"
-              onClick={() => handleClickAuthor(phost.author.id)}
+              onClick={() => handleClickAuthor(author.id)}
             />
-            <p onClick={() => handleClickAuthor(phost.author.id)}>
-              {phost.author === undefined ? "unknown" : phost.author.username}
+            <p onClick={() => handleClickAuthor(author.id)}>
+              {author === null ? "unknown" : author.username}
             </p>
           </div>
           <div className="phostpage-info-divider"></div>

@@ -8,7 +8,6 @@ const CreateBox = () => {
   const [EncodedImg, setEncodedImg] = useState(null);
   const [Submitted, setSubmitted] = useState(false);
   const [Loading, setLoading] = useState(false);
-  const [ImageUrl, setImageUrl] = useState(null);
   const [Status, setStatus] = useState({ success: false, message: "" });
 
   const navigate = useNavigate();
@@ -31,10 +30,12 @@ const CreateBox = () => {
 
       if (res.status === 200) {
         const { img_url } = await res.json();
-        setImageUrl(img_url === undefined ? null : img_url);
+
+        return img_url;
       }
     } catch (error) {
       console.error(error);
+      return null;
     }
   };
 
@@ -70,16 +71,14 @@ const CreateBox = () => {
       return;
     }
 
-    await uploadImage(EncodedImg);
-
     const data = {
-      img: ImageUrl,
+      img: await uploadImage(EncodedImg),
       text: text,
       author_id: localStorage.getItem("user_id"),
     };
 
     try {
-      const res = await fetch(serverInfo.url + "/api/create", {
+      const res = await fetch(serverInfo.url + "/api/phost", {
         method: "POST",
         body: JSON.stringify(data),
         headers: { "Content-Type": "application/json" },
@@ -89,7 +88,10 @@ const CreateBox = () => {
         const { phost_id } = await res.json();
         setStatus({ success: true, message: "Phosted!" });
         setLoading(false);
-        navigate(`/phost/${phost_id}`);
+
+        setTimeout(() => {
+          navigate(`/phost/${phost_id}`);
+        }, 2000);
       } else {
         setStatus({
           success: false,

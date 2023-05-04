@@ -976,6 +976,11 @@ ul {
     margin: 0 auto;
     /* text-align: center; */
     max-width: var(--max-width);
+    text-align: center;
+}
+
+.user-page-no-post {
+    margin: 2rem auto;
 }
 
 .user-page-info {
