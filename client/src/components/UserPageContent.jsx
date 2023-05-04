@@ -66,7 +66,9 @@ const UserPageContent = ({ user }) => {
       {loading && <div className="loading" />}
 
       {!loading && failed && (
-        <div className="alert-danger">Failed to load data</div>
+        <div className="alert-danger">
+          Failed to load user data! Please try again!
+        </div>
       )}
 
       {fetched &&

@@ -47,6 +47,13 @@ const Userpage = () => {
     <>
       <Navbar />
       <div className="page-content">
+        {loading && <div className="loading" />}
+
+        {!loading && failed && (
+          <div className="alert-danger">
+            Failed to load user data! Please try again!
+          </div>
+        )}
         {fetched && <UserpageContent user={user} />}
       </div>
       <Footer />
