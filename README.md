@@ -48,6 +48,29 @@ We also got these features under construnctions:
 
 We have seperate frontend and backend services. Please build & develop them seperately and deploy them simultaneously.
 
+### Prerequisites
+
+Please apply for these platforms and services before you start:
+
+- [MongoDB atlas](https://www.mongodb.com/cloud/atlas)
+- [Cloudinary](https://cloudinary.com/)
+
+Then, create a `.env` file in `./server` directory and fill in the following information:
+
+```shell
+
+# MongoDB atlas
+mongoSource= ## altas or local
+atlas_mongoURI = <your_mongodb_atlas_cluster_URL>
+local_mongoURI = <your_local_mongodb_URL>
+
+# Cloudinary
+CLOUDINARY_CLOUD_NAME = <your_cloudinary_cloud_name>
+CLOUDINARY_API_KEY= <your_cloudinary_api_key>
+CLOUDINARY_API_SECRET = <your_cloudinary_api_secret>
+
+```
+
 ### Backend
 
 Install dependencies
@@ -96,6 +119,14 @@ Develop and debug services
 ```shell
 npm run dev
 ```
+
+---
+
+## API documentations
+
+We defined a set of REST APIs for the communication between frontend and backend services.
+
+Visit here 👉 [API documentations](./doc/API.md)
 
 ---
 
