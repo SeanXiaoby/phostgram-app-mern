@@ -63,6 +63,29 @@ const UserPageContent = ({ user }) => {
         <h4>{userData === null ? "unknown" : userData.username}</h4>
       </div>
 
+      {localStorage.getItem("user_id") === userData.id && (
+        <div className="user-page-options-container">
+          <button
+            className="btn btn-block"
+            type="button"
+            onClick={() => {
+              navigate("/create");
+            }}
+          >
+            Create Phost
+          </button>
+          <button
+            className="btn btn-block"
+            type="button"
+            onClick={() => {
+              navigate(`/user/${userData.id}/edit`);
+            }}
+          >
+            Edit Profile
+          </button>
+        </div>
+      )}
+
       {loading && <div className="loading" />}
 
       {!loading && failed && (
