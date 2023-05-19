@@ -22,7 +22,7 @@ const Navbar = () => {
   };
 
   const handleClickAvatar = () => {
-    navigate(`/user/${user}/edit`);
+    navigate(`/user/${user}`);
   };
 
   return (

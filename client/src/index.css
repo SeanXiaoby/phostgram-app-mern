@@ -996,7 +996,6 @@ ul {
 .user-page-info {
     margin: 2rem auto;
     margin-bottom: 0;
-    border-bottom: 1px solid var(--grey-600);
 }
 
 .user-page-info img {
@@ -1027,6 +1026,15 @@ ul {
     text-transform: none;
 }
 
+.user-page-options-container {
+    margin: 1rem auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+    width: 100%;
+    max-width: var(--fixed-width);
+}
+
 .user-page-gallery {
     width: 100%;
     margin: 1rem auto;
@@ -1034,6 +1042,8 @@ ul {
     grid-template-columns: 1fr 1fr 1fr;
     min-width: 300px;
     gap: 2px;
+    border-top: 1px solid var(--grey-600);
+    padding-top: 1rem;
 }
 
 @media screen and (max-width: 768px) {
