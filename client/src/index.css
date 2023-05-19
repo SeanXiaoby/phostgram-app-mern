@@ -470,6 +470,12 @@ ul {
     margin: 0.5rem auto;
 }
 
+.footer-inline-link {
+    color: var(--primary-200);
+    text-decoration: none;
+    cursor: pointer;
+}
+
 
 
 /********* page content *********/

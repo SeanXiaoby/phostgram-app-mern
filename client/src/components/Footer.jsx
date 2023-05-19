@@ -52,8 +52,15 @@ const Footer = () => {
       </div>
       <div className="footer-rights-container">
         <h4 className="footer-rights">
-          Copyrights © Boyang Xiao, Yuangfeng Li, Zhen Qian 2023 All rights
-          reserved
+          Copyrights ©
+          <a
+            href="https://github.com/SeanXiaoby"
+            target="_blank"
+            className="footer-inline-link"
+          >
+            {" Boyang Xiao "}
+          </a>
+          {new Date().getFullYear()} All rights reserved
         </h4>
       </div>
     </div>
