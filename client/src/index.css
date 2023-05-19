@@ -1024,6 +1024,7 @@ ul {
 .user-page-info h4 {
     font-weight: 600;
     color: var(--primary-600);
+    text-transform: none;
 }
 
 .user-page-gallery {
