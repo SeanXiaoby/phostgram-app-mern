@@ -470,6 +470,12 @@ ul {
     margin: 0.5rem auto;
 }
 
+.footer-inline-link {
+    color: var(--primary-200);
+    text-decoration: none;
+    cursor: pointer;
+}
+
 
 
 /********* page content *********/
@@ -1018,6 +1024,7 @@ ul {
 .user-page-info h4 {
     font-weight: 600;
     color: var(--primary-600);
+    text-transform: none;
 }
 
 .user-page-gallery {

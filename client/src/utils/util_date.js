@@ -4,6 +4,8 @@ const getTimeDiff = (date) => {
   const oneWeek = 1000 * 60 * 60 * 24 * 7;
   const oneDay = 1000 * 60 * 60 * 24;
   const oneHour = 1000 * 60 * 60;
+  const oneMinute = 1000 * 60;
+  const oneSecond = 1000;
 
   if (timeDiff >= oneYear) {
     return `${Math.floor(timeDiff / oneYear)} years ago`;
@@ -11,8 +13,12 @@ const getTimeDiff = (date) => {
     return `${Math.floor(timeDiff / oneWeek)} weeks  ago`;
   } else if (timeDiff >= oneDay) {
     return `${Math.floor(timeDiff / oneDay)} days  ago`;
-  } else {
+  } else if (timeDiff >= oneHour) {
     return `${Math.floor(timeDiff / oneHour)} hours  ago`;
+  } else if (timeDiff >= oneMinute) {
+    return `${Math.floor(timeDiff / oneMinute)} minutes  ago`;
+  } else {
+    return `${Math.floor(timeDiff / oneSecond)} seconds  ago`;
   }
 };
 
