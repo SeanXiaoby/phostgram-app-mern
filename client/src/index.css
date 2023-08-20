@@ -724,6 +724,7 @@ ul {
     object-fit: contain;
     background: transparent;
     transition: var(--transition);
+    cursor: pointer;
 }
 
 /* .phostpage-content img:hover {
