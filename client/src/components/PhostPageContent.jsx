@@ -24,7 +24,14 @@ const PhostPageContent = ({ phost, author }) => {
 
   return (
     <>
-      <img className="phostpage-img" src={phost.img} alt="placeholder" />
+      <img
+        className="phostpage-img"
+        src={phost.img}
+        alt="placeholder"
+        onClick={() => {
+          window.open(phost.img, "_blank");
+        }}
+      />
       <div className="phostpage-content">
         <div className="phostpage-info">
           <div className="phostpage-info-author">
