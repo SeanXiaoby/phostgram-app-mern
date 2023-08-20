@@ -42,6 +42,8 @@ app.post("/api/auth/login", async (req, res, next) => {
   // Login API
   const info = req.body;
 
+  console.log(info);
+
   if (info === undefined || info === null) {
     res.status(400).json({ error: { message: "Empty body" } });
     return next();
@@ -64,17 +66,17 @@ app.post("/api/auth/login", async (req, res, next) => {
     return next();
   }
 
-  const previous_session_id = await db.sessionIsAlreadyLogin(
-    await db.findUserName(info.username)
-  );
+  // const previous_session_id = await db.sessionIsAlreadyLogin(
+  //   await db.findUserName(info.username)
+  // );
 
-  if (previous_session_id !== null) {
-    res.status(409).json({
-      error: { message: "already logged in" },
-      session_id: previous_session_id,
-    });
-    return next();
-  }
+  // if (previous_session_id !== null) {
+  //   res.status(409).json({
+  //     error: { message: "already logged in" },
+  //     session_id: previous_session_id,
+  //   });
+  //   return next();
+  // }
 
   const session_id = await db.sessionLogin(
     await db.findUserName(info.username)
