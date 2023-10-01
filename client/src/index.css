@@ -47,8 +47,8 @@ html {
     --green-dark: #0f5132;
 
     /* fonts */
-    --heading-font: 'Roboto', sans-serif;
-    --body-font: 'Roboto', sans-serif;
+    --heading-font: "Poppins", "Comfortaa", "fira code", 'Roboto', sans-serif;
+    --body-font: "Poppins", "Comfortaa", "fira code", 'Roboto', sans-serif;
 
     --backgroud-color: var(--grey-50);
     --text-color: var(--grey-900);
